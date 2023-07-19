@@ -9,9 +9,9 @@ func _ready():
 	item_count = 0
 
 
-func hit(body):
-	if body.is_in_group("players"):
-		if body.powerup.powerup_level >= 1 and item_count <= 0:
+func hit():
+	if last_hit_body.is_in_group("players"):
+		if last_hit_body.powerup.powerup_level >= 1 and item_count <= 0:
 			for i in 4:
 				var particle = BRICK_PARTICLE.instantiate()
 				particle.position = position
@@ -37,4 +37,4 @@ func hit(body):
 			queue_free()
 			return
 	
-	super(body)
+	super()

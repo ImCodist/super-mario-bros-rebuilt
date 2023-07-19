@@ -8,7 +8,8 @@ const JUMP_SPEED = 140
 const GRAVITY = 1200
 
 
-@export var item := preload("res://scenes/effects/coin_block/coin_block.tscn")
+@export var item: PackedScene = preload("res://scenes/effects/coin_block/coin_block.tscn")
+@export var item_secondary: PackedScene
 
 @export var item_count := 1
 
@@ -19,6 +20,8 @@ var sprite_velocity := Vector2.ZERO
 
 var queue_item_spawn := false
 var is_empty := false
+
+var last_hit_body: PhysicsBody2D
 
 @onready var sprite := $Sprite
 @onready var collision := $Collision
@@ -43,7 +46,7 @@ func _process(delta):
 		landed()
 
 
-func hit(_body):
+func hit():
 	if not is_empty:
 		if invisible:
 			sprite.visible = true
@@ -77,7 +80,12 @@ func landed():
 
 
 func spawn_item():
-	var item_scene = item.instantiate()
+	var scene_to_use = item
+	if item_secondary != null and last_hit_body != null and last_hit_body.powerup != null:
+		if last_hit_body.powerup.powerup_level <= 0:
+			scene_to_use = item_secondary
+	
+	var item_scene = scene_to_use.instantiate()
 	item_scene.position = position
 	item_scene.z_index = -4
 	
@@ -102,4 +110,5 @@ func _on_player_detection_body_entered(body):
 			return
 		
 		body.hit_block = true
-		hit(body)
+		last_hit_body = body
+		hit()
