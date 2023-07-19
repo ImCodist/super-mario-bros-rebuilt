@@ -112,7 +112,14 @@ func add_points(points: int, spawn_hud := false, spawn_position := Vector2.ZERO)
 
 func spawn_points(spawn_position: Vector2, points: int):
 	var points_scene = POINTS_SCENE.instantiate()
-	points_scene.position = spawn_position - (camera.position - (get_viewport_rect().size / 2))
+	
+	var offset = (camera.position - (get_viewport_rect().size / 2))
+	if offset.x < 0:
+		offset.x = 0
+	if offset.y < 0:
+		offset.y = 0
+	
+	points_scene.position = spawn_position - offset
 	points_scene.points = points
 	
 	score_canvas.add_child(points_scene)

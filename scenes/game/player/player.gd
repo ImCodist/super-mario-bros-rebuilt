@@ -351,6 +351,7 @@ func _do_animation(delta):
 		
 	if crouching:
 		anim = "crouch"
+		do_flip = false
 		
 	if anim == "walk":
 		anim_speed = (abs(velocity.x) / RUN_SPEED) * 5
