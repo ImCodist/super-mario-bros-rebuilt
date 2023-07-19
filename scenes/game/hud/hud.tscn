@@ -1,0 +1,110 @@
+[gd_scene load_steps=5 format=3 uid="uid://bennscgrlfdkx"]
+
+[ext_resource type="Script" path="res://scripts/nodes/sprite_label.gd" id="1_fhgh1"]
+[ext_resource type="Script" path="res://scenes/game/hud/hud.gd" id="1_qgyap"]
+[ext_resource type="Resource" uid="uid://csmf3c8m1cfyo" path="res://assets/resources/other/font.tres" id="2_0bkng"]
+[ext_resource type="Texture2D" uid="uid://5jyllltbvss2" path="res://assets/sprites/hud/coin_hud.png" id="4_v5bs0"]
+
+[node name="HUD" type="CanvasLayer"]
+layer = -10
+script = ExtResource("1_qgyap")
+
+[node name="MainControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerLabel" type="Control" parent="MainControl"]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 64.0
+offset_bottom = 48.0
+script = ExtResource("1_fhgh1")
+text = "mario"
+sprite_font = ExtResource("2_0bkng")
+
+[node name="ScoreLabel" type="Control" parent="MainControl"]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 56.0
+script = ExtResource("1_fhgh1")
+text = "000000"
+sprite_font = ExtResource("2_0bkng")
+
+[node name="CoinHud" type="Sprite2D" parent="MainControl"]
+position = Vector2(92, 20)
+texture = ExtResource("4_v5bs0")
+hframes = 3
+vframes = 4
+
+[node name="CoinLabel" type="Control" parent="MainControl"]
+anchors_preset = 0
+offset_left = 96.0
+offset_top = 16.0
+offset_right = 136.0
+offset_bottom = 56.0
+script = ExtResource("1_fhgh1")
+text = "*00"
+sprite_font = ExtResource("2_0bkng")
+
+[node name="WorldLabel" type="Control" parent="MainControl"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -112.0
+offset_top = 8.0
+offset_right = -72.0
+offset_bottom = 48.0
+grow_horizontal = 0
+script = ExtResource("1_fhgh1")
+text = "world"
+sprite_font = ExtResource("2_0bkng")
+
+[node name="WorldValueLabel" type="Control" parent="MainControl"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -112.0
+offset_top = 16.0
+offset_right = -72.0
+offset_bottom = 56.0
+grow_horizontal = 0
+script = ExtResource("1_fhgh1")
+text = " 1-1"
+sprite_font = ExtResource("2_0bkng")
+
+[node name="TimeLabel" type="Control" parent="MainControl"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 8.0
+offset_right = -16.0
+offset_bottom = 48.0
+grow_horizontal = 0
+script = ExtResource("1_fhgh1")
+text = "time"
+sprite_font = ExtResource("2_0bkng")
+
+[node name="TimeValueLabel" type="Control" parent="MainControl"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 56.0
+grow_horizontal = 0
+script = ExtResource("1_fhgh1")
+text = " 999"
+sprite_font = ExtResource("2_0bkng")

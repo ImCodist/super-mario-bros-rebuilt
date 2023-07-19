@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SpriteFont" load_steps=3 format=3 uid="uid://csmf3c8m1cfyo"]
+
+[ext_resource type="Script" path="res://scripts/resources/sprite_font.gd" id="1_jma58"]
+[ext_resource type="Texture2D" uid="uid://bdw16vamjegpc" path="res://assets/sprites/hud/font.png" id="2_4e00c"]
+
+[resource]
+script = ExtResource("1_jma58")
+texture = ExtResource("2_4e00c")
+hframes = 42
+vframes = 1
+char_string = "0123456789abcdefghijklmnopqrstuvwxyz-*!.©"

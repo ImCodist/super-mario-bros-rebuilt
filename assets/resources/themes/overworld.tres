@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelTheme" load_steps=3 format=3 uid="uid://fqgo3vvx6pyv"]
+
+[ext_resource type="Script" path="res://scripts/resources/level_theme.gd" id="1_g40v2"]
+[ext_resource type="TileSet" uid="uid://bxl0rshf5pmkw" path="res://assets/resources/tilesets/overworld.tres" id="2_24kb2"]
+
+[resource]
+script = ExtResource("1_g40v2")
+music = "overworld"
+background_color = Color(0.580392, 0.580392, 1, 1)
+tileset = ExtResource("2_24kb2")

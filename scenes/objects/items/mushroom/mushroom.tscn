@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3wxyy12a4jgn"]
+
+[ext_resource type="PackedScene" uid="uid://c1347bl1g3pr" path="res://scenes/objects/base/item/item.tscn" id="1_fvhk8"]
+
+[node name="Mushroom" instance=ExtResource("1_fvhk8")]

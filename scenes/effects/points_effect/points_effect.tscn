@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6b5kxn3udpv8"]
+
+[ext_resource type="Texture2D" uid="uid://dr8dbo8iumnnn" path="res://assets/sprites/hud/points.png" id="1_qmfhc"]
+[ext_resource type="Script" path="res://scenes/effects/points_effect/points_effect.gd" id="2_et00p"]
+
+[node name="PointsEffect" type="Sprite2D"]
+texture = ExtResource("1_qmfhc")
+hframes = 11
+script = ExtResource("2_et00p")

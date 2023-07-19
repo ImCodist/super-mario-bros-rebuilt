@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccxdgerw6grxv"]
+
+[ext_resource type="Texture2D" uid="uid://buiae7av0ya71" path="res://assets/sprites/themes/overworld/brick_particles.png" id="1_03vhr"]
+[ext_resource type="Script" path="res://scenes/effects/brick_particle/brick_particle.gd" id="2_hhr4w"]
+
+[node name="brick_particle" type="Sprite2D"]
+texture = ExtResource("1_03vhr")
+hframes = 4
+script = ExtResource("2_hhr4w")

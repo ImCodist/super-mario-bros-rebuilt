@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://26olgx38f0tj"]
+
+[ext_resource type="PackedScene" uid="uid://blnr0xsfgyyyu" path="res://scenes/other/emu_hud/emu_hud_controller/emu_hud_controller.tscn" id="1_k4ftl"]
+[ext_resource type="Script" path="res://scenes/other/emu_hud/emu_hud.gd" id="1_p3yw8"]
+
+[node name="emu_hud" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_p3yw8")
+
+[node name="emu_hud_controller" parent="." instance=ExtResource("1_k4ftl")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -3.0
+offset_right = 3.0
+offset_bottom = -3.0
+grow_vertical = 0

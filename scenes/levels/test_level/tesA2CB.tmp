@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://dajn25kggdwqt"]
+
+[ext_resource type="Script" path="res://scenes/levels/test_level/test_level.gd" id="1_maduj"]
+[ext_resource type="PackedScene" uid="uid://clsh1qscgkcox" path="res://scenes/game/player/player.tscn" id="2_cpexs"]
+[ext_resource type="TileSet" uid="uid://da3c6iy2nxmbc" path="res://assets/resources/tilesets/base.tres" id="4_fx7hy"]
+[ext_resource type="Script" path="res://scripts/nodes/levelmap.gd" id="4_iti1o"]
+[ext_resource type="Resource" uid="uid://djq0jqose5j2a" path="res://assets/resources/powerups/big.tres" id="5_71cac"]
+
+[node name="test_level" type="Node2D"]
+script = ExtResource("1_maduj")
+
+[node name="LevelMap" type="TileMap" parent="."]
+position = Vector2(0, 8)
+tile_set = ExtResource("4_fx7hy")
+format = 2
+layer_0/tile_data = PackedInt32Array(851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 851974, 1, 0, 851975, 1, 0, 851976, 1, 0, 851977, 1, 0, 851978, 1, 0, 851979, 1, 0, 851980, 1, 0, 851981, 1, 0, 851982, 1, 0, 851983, 1, 0, 786447, 1, 0, 786446, 1, 0, 786445, 1, 0, 786444, 1, 0, 786443, 1, 0, 786442, 1, 0, 786441, 1, 0, 786440, 1, 0, 786439, 1, 0, 786438, 1, 0, 786437, 1, 0, 786436, 1, 0, 786435, 1, 0, 786434, 1, 0, 786433, 1, 0, 786432, 1, 0, 851968, 1, 0, 720901, 65537, 0, 720902, 65537, 0, 720903, 65537, 0, 655366, 65537, 0, 655367, 65537, 0, 655368, 65537, 0, 720904, 65537, 0, 589832, 65537, 0, 589831, 65537, 0, 524296, 65537, 0, 393228, 655361, 0, 393229, 720897, 0, 458764, 655361, 1, 524300, 655361, 1, 589836, 655361, 1, 655372, 655361, 1, 720908, 655361, 1, 720909, 720897, 1, 655373, 720897, 1, 589837, 720897, 1, 524301, 720897, 1, 458765, 720897, 1, 786448, 1, 0, 786449, 1, 0, 786450, 1, 0, 786451, 1, 0, 786452, 1, 0, 786453, 1, 0, 851989, 1, 0, 851988, 1, 0, 851987, 1, 0, 851986, 1, 0, 851985, 1, 0, 851984, 1, 0, 589843, 720897, 0, 589842, 655361, 0, 655378, 655361, 1, 655379, 720897, 1, 720914, 655361, 1, 720915, 720897, 1, 720905, 65537, 0, 655369, 65537, 0, 589833, 65537, 0, 524297, 65537, 0)
+script = ExtResource("4_iti1o")
+
+[node name="Player" parent="." instance=ExtResource("2_cpexs")]
+position = Vector2(24, 200)
+powerup = ExtResource("5_71cac")

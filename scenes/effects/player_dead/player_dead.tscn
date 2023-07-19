@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cspgb06aqruku"]
+
+[ext_resource type="Script" path="res://scenes/effects/player_dead/player_dead.gd" id="1_hqqvn"]
+
+[node name="PlayerDead" type="Node2D"]
+script = ExtResource("1_hqqvn")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
