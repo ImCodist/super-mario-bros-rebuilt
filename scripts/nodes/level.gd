@@ -154,6 +154,7 @@ func _set_background_color(value: Color):
 
 func _create_camera():
 	camera = Camera2D.new()
+	camera.process_mode = Node.PROCESS_MODE_ALWAYS
 	camera.position = SCREEN_SIZE / 2
 	camera.limit_bottom = int(SCREEN_SIZE.y)
 	add_child(camera)
@@ -238,7 +239,7 @@ func _update_camera(delta):
 		camera.limit_left = -1000000000
 	
 	# Round the cameras position to prevent weird graphic fuck ups.
-	camera.offset = camera.position.round() - camera.position
+	#camera.offset = camera.position.round() - camera.position
 
 
 func _update_hud():

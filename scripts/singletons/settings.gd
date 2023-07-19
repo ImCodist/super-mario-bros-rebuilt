@@ -22,3 +22,8 @@ var powerup_jump_bug := true
 ## Makes one of the audio channels mute when a SFX is being played to make "room".
 ## Obviously this isn't needed because Godot, so it is a hardcoded thing.
 var mute_music_channel_on_sfx := false
+
+
+# === EASTER EGGS ===
+var gamer_style := true
+var codist_death_sound := true

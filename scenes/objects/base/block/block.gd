@@ -30,7 +30,7 @@ func _ready():
 		sprite.visible = false
 		collision.one_way_collision = true
 		collision.rotation_degrees = 180
-
+		
 
 func _process(delta):
 	if sprite.position.y < sprite_start_position.y or sprite_velocity.y < 0:
@@ -47,7 +47,7 @@ func hit(_body):
 	if not is_empty:
 		if invisible:
 			sprite.visible = true
-			collision.one_way_collision = false
+			collision.set_deferred("one_way_collision", false)
 			collision.rotation_degrees = 0
 		
 		sprite_velocity.y = -JUMP_SPEED

@@ -143,11 +143,11 @@ func _physics_process(delta):
 		# Horizontal movement
 		_do_horizontal_movement(delta)
 		
-		# Other stuffs
-		_do_other()
-		
 		# Do animation
 		_do_animation(delta)
+		
+		# Other stuffs
+		_do_other()
 	
 		# Move the player
 		move_and_slide()
@@ -277,6 +277,20 @@ func _do_vertical_movement():
 func _do_other():
 	if hit_block and is_on_floor():
 		hit_block = false
+	
+	# wow
+	if Settings.gamer_style and powerup.powerup_level == 1:
+		if Input.is_action_pressed("secret"):
+			sprite.flip_h = false
+			sprite.speed_scale = 3
+			sprite.play("gagng")
+			
+			if not $SecretSong.playing:
+				$SecretSong.play()
+				Audio.stop_music()
+		if Input.is_action_just_released("secret"):
+			$SecretSong.stop()
+			Audio.resume_music()
 
 func _do_other_unpaused(delta):
 	if can_bug_jump:
@@ -497,7 +511,7 @@ func die(spawn_effect := true):
 		get_parent().add_child(scene)
 	
 	Audio.play_sfx(SFX_DEATH)
-	if randi_range(0, 200) == 21:
+	if Settings.codist_death_sound and randi_range(0, 200) == 21:
 		Audio.play_sfx(SFX_DEATH_SEQUEL)
 	
 	Main.game_paused = true

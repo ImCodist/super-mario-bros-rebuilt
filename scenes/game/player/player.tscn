@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://clsh1qscgkcox"]
+[gd_scene load_steps=21 format=3 uid="uid://clsh1qscgkcox"]
 
 [ext_resource type="Script" path="res://scenes/game/player/player.gd" id="1_p6g8x"]
 [ext_resource type="Texture2D" uid="uid://wbp0lcv0cu5v" path="res://assets/sprites/player_mario.png" id="3_mkhjq"]
+[ext_resource type="AudioStream" uid="uid://bmfwmxwqe2n1l" path="res://assets/sounds/other/gagnum_style.ogg" id="3_si3jy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_epfeh"]
 atlas = ExtResource("3_mkhjq")
@@ -179,3 +180,6 @@ polygon = PackedVector2Array(-6, 0, 6, 0, 6, -11, -6, -11)
 
 [node name="CrouchRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, -16)
+
+[node name="SecretSong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_si3jy")
