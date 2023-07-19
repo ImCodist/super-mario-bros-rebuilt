@@ -37,6 +37,7 @@ const SCREEN_SIZE = Vector2(256, 224)
 
 
 var hud: CanvasLayer
+var score_canvas: CanvasLayer
 
 var camera: Camera2D
 var camera_collision: CollisionShape2D
@@ -114,12 +115,16 @@ func spawn_points(spawn_position: Vector2, points: int):
 	points_scene.position = spawn_position - (camera.position - (get_viewport_rect().size / 2))
 	points_scene.points = points
 	
-	hud.add_child(points_scene)
+	score_canvas.add_child(points_scene)
 
 
 func _create_nodes():
 	hud = HUD_SCENE.instantiate()
 	add_child(hud)
+	
+	score_canvas = CanvasLayer.new()
+	score_canvas.layer = 1
+	add_child(score_canvas)
 	
 	var background_canvas = CanvasLayer.new()
 	background_canvas.layer = -15

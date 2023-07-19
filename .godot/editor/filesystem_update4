@@ -1,8 +1,9 @@
-res://scenes/game/player/player.tscn
+res://scenes/objects/items/fire_flower/fire_flower.tscn
 res://assets/resources/tilesets/overworld.tres
 res://assets/resources/tilesets/base.tres
 res://assets/resources/characters/mario.tres
-res://scenes/game/player/player.gd
+res://scenes/objects/items/fire_flower/fire_flower.gd
+res://scenes/game/player/player.tscn
 res://scenes/objects/blocks/brick/brick.tscn
 res://scenes/effects/brick_particle/brick_particle.tscn
 res://scenes/levels/test_level/test_level.tscn
@@ -11,5 +12,6 @@ res://scenes/objects/base/block/block.tscn
 res://scenes/game/hud/hud.tscn
 res://scenes/objects/items/mushroom/mushroom.tscn
 res://scenes/objects/base/item/item.tscn
+res://scripts/singletons/settings.gd
+res://scenes/game/player/player.gd
 res://scripts/nodes/level.gd
-res://scenes/objects/base/block/block.gd

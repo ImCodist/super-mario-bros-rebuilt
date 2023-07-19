@@ -1,7 +1,7 @@
+CanvasLayer
 AudioStreamPlayer
 VisibleOnScreenNotifier2D
 Node2D
-CanvasLayer
 AudioStreamPlayer2D
 Sprite2D
 CollisionShape2D

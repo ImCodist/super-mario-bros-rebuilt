@@ -1,6 +1,13 @@
 extends Node
 
 
+# == GAMEPLAY ==
+## In SMB when mario grabs a Fire Flower when he is 
+## Mario instead of Super Mario he turns into Super Mario.
+## In modern games this does not happen.
+var fire_flower_to_super := true
+
+
 # === VISUALS ===
 ## If Mario should be rendered in front or behind the HUD layer.
 ## In SMB he is rendered in front of everything.
@@ -26,4 +33,4 @@ var mute_music_channel_on_sfx := false
 
 # === EASTER EGGS ===
 var gamer_style := true
-var codist_death_sound := true
+var programmer_death_sound := true

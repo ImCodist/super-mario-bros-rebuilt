@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Character" load_steps=166 format=3 uid="uid://kgdk5i5x0ik8"]
+[gd_resource type="Resource" script_class="Character" load_steps=181 format=3 uid="uid://kgdk5i5x0ik8"]
 
 [ext_resource type="Texture2D" uid="uid://wbp0lcv0cu5v" path="res://assets/sprites/player_mario.png" id="1_5i6hy"]
 [ext_resource type="Script" path="res://scripts/resources/character_powerup.gd" id="1_mom4b"]
@@ -1205,7 +1205,141 @@ script = ExtResource("1_mom4b")
 powerup_id = "big"
 sprite_frames = SubResource("SpriteFrames_1cd4p")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1out"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(96, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpj22"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(0, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55mxi"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(80, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obw1e"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(64, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odj5w"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(144, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06y8t"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(176, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgqtq"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(208, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glsbn"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(160, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljnvi"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(192, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irr15"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(224, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l84ko"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(16, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhxa6"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(32, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4bn7"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(48, 64, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g06ei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1out")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpj22")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55mxi")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obw1e")
+}],
+"loop": true,
+"name": &"skid",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odj5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06y8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgqtq")
+}],
+"loop": true,
+"name": &"swim1",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glsbn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljnvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irr15")
+}],
+"loop": true,
+"name": &"swim2",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l84ko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhxa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4bn7")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_1dpge"]
+script = ExtResource("1_mom4b")
+powerup_id = "fire"
+sprite_frames = SubResource("SpriteFrames_g06ei")
+
 [resource]
 script = ExtResource("1_wmk17")
 name = "mario"
-powerups = Array[ExtResource("1_mom4b")]([SubResource("Resource_18lyn"), SubResource("Resource_1j66m")])
+powerups = Array[ExtResource("1_mom4b")]([SubResource("Resource_18lyn"), SubResource("Resource_1j66m"), SubResource("Resource_1dpge")])

@@ -13,6 +13,9 @@ size = Vector2(12, 12)
 collision_layer = 4
 script = ExtResource("1_x22ec")
 
+[node name="VisibleOnScreen" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.8, 0.8)
+
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_dn6io")
 
@@ -28,8 +31,5 @@ collision_mask = 2
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_tscmy")
 
-[node name="VisibleOnScreen" type="VisibleOnScreenNotifier2D" parent="."]
-scale = Vector2(0.8, 0.8)
-
-[connection signal="body_entered" from="CollectArea" to="." method="_on_collect_area_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreen" to="." method="_on_visible_on_screen_screen_exited"]
+[connection signal="body_entered" from="CollectArea" to="." method="_on_collect_area_body_entered"]

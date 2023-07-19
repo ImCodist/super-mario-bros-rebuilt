@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://gshs0p4wrbvo"]
+
+[ext_resource type="PackedScene" uid="uid://c1347bl1g3pr" path="res://scenes/objects/base/item/item.tscn" id="1_1nfnb"]
+[ext_resource type="Resource" uid="uid://dp2lsjnn80s2h" path="res://assets/resources/powerups/fire.tres" id="2_07coy"]
+[ext_resource type="Texture2D" uid="uid://cn4fsh8y0q3gd" path="res://assets/sprites/themes/overworld/fire_flower.png" id="2_hhq3m"]
+[ext_resource type="Script" path="res://scenes/objects/items/fire_flower/fire_flower.gd" id="2_mys7e"]
+
+[node name="Item" instance=ExtResource("1_1nfnb")]
+script = ExtResource("2_mys7e")
+powerup = ExtResource("2_07coy")
+move_horizontally = false
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_hhq3m")
+hframes = 4

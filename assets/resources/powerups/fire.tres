@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Powerup" load_steps=2 format=3 uid="uid://dp2lsjnn80s2h"]
+
+[ext_resource type="Script" path="res://scripts/resources/powerup.gd" id="1_qgg3j"]
+
+[resource]
+script = ExtResource("1_qgg3j")
+powerup_id = "fire"
+hitbox_height = 26
+powerup_level = 2
+points = 1000

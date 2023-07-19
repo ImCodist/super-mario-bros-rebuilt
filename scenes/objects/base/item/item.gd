@@ -18,6 +18,8 @@ var from_block := false
 
 @export var powerup: Powerup = preload("res://assets/resources/powerups/big.tres")
 
+@export var move_horizontally := true
+
 
 @onready var original_position := position
 
@@ -48,7 +50,9 @@ func _physics_process(delta):
 			direction = -direction
 		
 		velocity.y += GRAVITY * delta
-		velocity.x = SPEED * direction
+		
+		if move_horizontally:
+			velocity.x = SPEED * direction
 		
 		move_and_slide()
 

@@ -277,61 +277,12 @@ func _do_vertical_movement():
 func _do_other():
 	if hit_block and is_on_floor():
 		hit_block = false
-	
-	# wow
-	if Settings.gamer_style and powerup.powerup_level == 1:
-		if Input.is_action_pressed("secret"):
-			sprite.flip_h = false
-			sprite.speed_scale = 3
-			sprite.play("gagng")
-			
-			if not $SecretSong.playing:
-				$SecretSong.play()
-				Audio.stop_music()
-		if Input.is_action_just_released("secret"):
-			$SecretSong.stop()
-			Audio.resume_music()
 
 func _do_other_unpaused(delta):
 	if can_bug_jump:
 		can_bug_jump = false
 	
-	if collect_anim_timer > 0:
-		collect_anim_timer -= delta
-		
-		collect_anim_grow_timer += delta
-		if collect_anim_grow_timer >= 0.08:
-			collect_anim_grow_frame += 1
-			collect_anim_grow_timer = 0
-		
-		if powerup.powerup_level == 1:
-			var current_powerup_sprites = character.get_powerup_sprites(powerup.powerup_id)
-			var small_powerup = character.powerups.front()
-			if small_powerup != null and current_powerup_sprites != null:
-				if collect_anim_grow_frame % 2 == 0:
-					sprite.sprite_frames = small_powerup.sprite_frames
-					sprite.play("idle")
-				else:
-					if collect_anim_grow_frame < 6:
-						sprite.sprite_frames = small_powerup.sprite_frames
-						sprite.play("grow")
-					else:
-						sprite.sprite_frames = current_powerup_sprites
-						sprite.play("idle")
-		
-		if collect_anim_timer <= 0:
-			_set_powerup(powerup)
-			if not is_on_floor():
-				sprite.play("walk")
-			
-			Main.game_paused = false
-			
-			if Settings.powerup_jump_bug:
-				can_bug_jump = true
-			
-			collect_anim_timer = 0.0
-			collect_anim_grow_timer = 0.0
-			collect_anim_grow_frame = 0.0
+	_do_powerup_animations(delta)
 
 
 func _do_animation(delta):
@@ -409,6 +360,20 @@ func _do_animation(delta):
 	
 	if move != 0 and do_flip:
 		sprite.flip_h = move != 1
+		
+	# secret
+	if Settings.gamer_style and powerup.powerup_level == 1:
+		if Input.is_key_pressed(KEY_ALT):
+			sprite.flip_h = false
+			anim_speed = 3
+			anim = "gagng"
+			
+			if not $SecretSong.playing:
+				$SecretSong.play()
+				Audio.stop_music()
+		elif $SecretSong.playing:
+			$SecretSong.stop()
+			Audio.resume_music()
 	
 	sprite.speed_scale = anim_speed
 	if anim != "":
@@ -417,6 +382,54 @@ func _do_animation(delta):
 		if anim_frame != null:
 			sprite.frame = anim_frame
 			sprite.frame_progress = anim_frame_progress
+
+
+func _do_powerup_animations(delta):
+	if collect_anim_timer > 0:
+		collect_anim_timer -= delta
+		
+		collect_anim_grow_timer += delta
+		if collect_anim_grow_timer >= 0.07:
+			collect_anim_grow_frame += 1
+			collect_anim_grow_timer = 0
+		
+		if previous_powerup.powerup_level == 0:
+			var current_powerup_sprites = character.get_powerup_sprites(powerup.powerup_id)
+			var small_powerup = character.powerups.front()
+			if small_powerup != null and current_powerup_sprites != null:
+				if collect_anim_grow_frame % 2 == 0:
+					sprite.sprite_frames = small_powerup.sprite_frames
+					sprite.play("idle")
+				else:
+					if collect_anim_grow_frame < 6:
+						sprite.sprite_frames = small_powerup.sprite_frames
+						sprite.play("grow")
+					else:
+						sprite.sprite_frames = current_powerup_sprites
+						sprite.play("idle")
+		else:
+			var current_powerup_sprites = character.get_powerup_sprites(powerup.powerup_id)
+			var previous_powerup_sprites = character.get_powerup_sprites(previous_powerup.powerup_id)
+			
+			if current_powerup_sprites != null and previous_powerup_sprites != null:
+				if collect_anim_grow_frame % 2 == 0:
+					sprite.sprite_frames = current_powerup_sprites
+				else:
+					sprite.sprite_frames = previous_powerup_sprites
+		
+		if collect_anim_timer <= 0:
+			_set_powerup(powerup)
+			if not is_on_floor():
+				sprite.play("walk")
+			
+			Main.game_paused = false
+			
+			if Settings.powerup_jump_bug:
+				can_bug_jump = true
+			
+			collect_anim_timer = 0.0
+			collect_anim_grow_timer = 0.0
+			collect_anim_grow_frame = 0
 
 
 func _can_uncrouch():
@@ -511,7 +524,7 @@ func die(spawn_effect := true):
 		get_parent().add_child(scene)
 	
 	Audio.play_sfx(SFX_DEATH)
-	if Settings.codist_death_sound and randi_range(0, 200) == 21:
+	if Settings.programmer_death_sound and randi_range(0, 200) == 21:
 		Audio.play_sfx(SFX_DEATH_SEQUEL)
 	
 	Main.game_paused = true
