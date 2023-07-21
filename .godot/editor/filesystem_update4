@@ -5,3 +5,9 @@ res://assets/resources/characters/mario.tres
 res://scenes/levels/test_level/test_level.tscn
 res://scenes/objects/items/1up/1up.gd
 res://scripts/nodes/level.gd
+res://scenes/objects/base/block/block.gd
+res://scenes/objects/items/coin/coin.tscn
+res://scenes/objects/other/coin/coin.tscn
+res://scenes/objects/other/coin/coin.gd
+res://scenes/objects/base/block/block.tscn
+res://scenes/objects/blocks/question_block/question_block.tscn

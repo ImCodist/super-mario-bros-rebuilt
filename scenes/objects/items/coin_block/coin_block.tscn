@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqr7rduyj0h2f"]
 
-[ext_resource type="Script" path="res://scenes/effects/coin_block/coin_block.gd" id="1_u7mvx"]
+[ext_resource type="Script" path="res://scenes/objects/items/coin_block/coin_block.gd" id="1_u7mvx"]
 [ext_resource type="Texture2D" uid="uid://se285jte4km2" path="res://assets/sprites/effects/coin_block.png" id="2_2qk4y"]
 
 [node name="CoinBlock" type="Node2D"]

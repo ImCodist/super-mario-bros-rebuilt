@@ -8,7 +8,7 @@ const JUMP_SPEED = 140
 const GRAVITY = 1200
 
 
-@export var item: PackedScene = preload("res://scenes/effects/coin_block/coin_block.tscn")
+@export var item: PackedScene = preload("res://scenes/objects/items/coin_block/coin_block.tscn")
 @export var item_secondary: PackedScene
 
 @export var item_count := 1
@@ -103,7 +103,7 @@ func _on_player_detection_body_entered(body):
 		if body.is_on_floor():
 			return
 		
-		if invisible and body.position.y <= position.y + 16:
+		if invisible and body.position.y - body.velocity.y <= position.y:
 			return
 		
 		if body.hit_block:
