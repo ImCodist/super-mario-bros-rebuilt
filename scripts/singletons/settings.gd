@@ -7,6 +7,10 @@ extends Node
 ## In modern games this does not happen.
 var fire_flower_to_super := true
 
+## How many fireballs mario can have on screen at once.
+## The default is 2.
+var max_fireballs := 2
+
 
 # === VISUALS ===
 ## If Mario should be rendered in front or behind the HUD layer.
@@ -28,7 +32,7 @@ var powerup_jump_bug := true
 ## Technically not a bug but a limitation of the NES.
 ## Makes one of the audio channels mute when a SFX is being played to make "room".
 ## Obviously this isn't needed because Godot, so it is a hardcoded thing.
-var mute_music_channel_on_sfx := false
+var mute_music_channel_on_sfx := true
 
 
 # === EASTER EGGS ===

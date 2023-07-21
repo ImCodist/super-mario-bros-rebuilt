@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt5dp6c7o4muj"]
+
+[ext_resource type="Script" path="res://scenes/objects/other/fireball/fireball.gd" id="1_fef43"]
+[ext_resource type="Texture2D" uid="uid://wwrpfj4fcj4" path="res://assets/sprites/objects/fireball.png" id="1_wgx2o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkshp"]
+size = Vector2(8, 8)
+
+[node name="Fireball" type="CharacterBody2D"]
+collision_layer = 256
+script = ExtResource("1_fef43")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_wgx2o")
+hframes = 4
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fkshp")
+
+[node name="OnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.4, 0.4)
+
+[connection signal="screen_exited" from="OnScreenNotifier" to="." method="_on_on_screen_notifier_screen_exited"]

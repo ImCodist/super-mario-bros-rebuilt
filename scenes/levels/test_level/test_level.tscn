@@ -31,13 +31,18 @@ position = Vector2(344, 144)
 item = ExtResource("7_prwlp")
 item_secondary = ExtResource("6_87rwa")
 
+[node name="QuestionBlock3" parent="." instance=ExtResource("7_yium3")]
+position = Vector2(72, 144)
+item = ExtResource("7_prwlp")
+item_secondary = ExtResource("6_87rwa")
+
 [node name="QuestionBlock2" parent="." instance=ExtResource("7_yium3")]
 position = Vector2(1032, 128)
 item = ExtResource("6_87rwa")
 invisible = true
 
-[node name="Player" parent="." instance=ExtResource("2_cpexs")]
-position = Vector2(48, 200)
-
 [node name="Item" parent="." instance=ExtResource("7_prwlp")]
 position = Vector2(72, 193)
+
+[node name="Player" parent="." instance=ExtResource("2_cpexs")]
+position = Vector2(48, 200)

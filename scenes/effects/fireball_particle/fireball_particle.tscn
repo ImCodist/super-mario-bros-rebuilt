@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsfwn837q5ej1"]
+
+[ext_resource type="Texture2D" uid="uid://bteku5tqq08b4" path="res://assets/sprites/effects/fireball_particle.png" id="1_padcl"]
+[ext_resource type="Script" path="res://scenes/effects/fireball_particle/fireball_particle.gd" id="2_efe5s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuqfj"]
+atlas = ExtResource("1_padcl")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8yne"]
+atlas = ExtResource("1_padcl")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otup2"]
+atlas = ExtResource("1_padcl")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uraqy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuqfj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8yne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otup2")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="fireball_particle" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_uraqy")
+frame = 2
+frame_progress = 1.0
+script = ExtResource("2_efe5s")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

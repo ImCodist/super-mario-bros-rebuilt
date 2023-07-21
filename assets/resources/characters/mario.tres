@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Character" load_steps=181 format=3 uid="uid://kgdk5i5x0ik8"]
+[gd_resource type="Resource" script_class="Character" load_steps=184 format=3 uid="uid://kgdk5i5x0ik8"]
 
 [ext_resource type="Texture2D" uid="uid://wbp0lcv0cu5v" path="res://assets/sprites/player_mario.png" id="1_5i6hy"]
 [ext_resource type="Script" path="res://scripts/resources/character_powerup.gd" id="1_mom4b"]
@@ -1209,6 +1209,18 @@ sprite_frames = SubResource("SpriteFrames_1cd4p")
 atlas = ExtResource("1_5i6hy")
 region = Rect2(96, 64, 16, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl0yh"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(256, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkvcp"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(272, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bvcl"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(288, 64, 16, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_cpj22"]
 atlas = ExtResource("1_5i6hy")
 region = Rect2(0, 64, 16, 32)
@@ -1265,6 +1277,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wl0yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkvcp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bvcl")
+}],
+"loop": true,
+"name": &"fire",
 "speed": 5.0
 }, {
 "frames": [{

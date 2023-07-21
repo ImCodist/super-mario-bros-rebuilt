@@ -102,6 +102,8 @@ select={
 2d_physics/layer_1="Tiles"
 2d_physics/layer_2="Players"
 2d_physics/layer_3="Items"
+2d_physics/layer_4="Layer 4"
+2d_physics/layer_9="Fireballs"
 
 [navigation]
 

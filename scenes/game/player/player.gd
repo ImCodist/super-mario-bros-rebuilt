@@ -5,6 +5,7 @@ extends CharacterBody2D
 # Scenes
 const DEATH_SCENE = preload("res://scenes/effects/player_dead/player_dead.tscn")
 const BUBBLE_SCENE = preload("res://scenes/effects/bubble/bubble.tscn")
+const FIREBALL_SCENE = preload("res://scenes/objects/other/fireball/fireball.tscn")
 
 # Sounds
 const SFX_JUMP_SMALL = preload("res://assets/sounds/jump_small.wav")
@@ -13,6 +14,7 @@ const SFX_SWIM = preload("res://assets/sounds/stomp.wav")
 const SFX_BUMP = preload("res://assets/sounds/bump.wav")
 const SFX_DEATH = preload("res://assets/sounds/die.wav")
 const SFX_DEATH_SEQUEL = preload("res://assets/sounds/die2.wav")
+const SFX_FIREBALL = preload("res://assets/sounds/fireball.wav")
 
 
 # Values taken from https://web.archive.org/web/20130807122227if_/http://i276.photobucket.com/albums/kk21/jdaster64/smb_playerphysics.png.
@@ -68,6 +70,7 @@ const WHIRLPOOL_GRAVITY_INCREASE = 225.0
 
 const CEILING_HIT_SPEED = 60.0
 const COLLECT_ANIM_TIME = 1.0
+const FIRE_ANIM_TIME = 0.1
 
 
 @export var character: Character = preload("res://assets/resources/characters/mario.tres"):
@@ -101,6 +104,8 @@ var swim_anim = 1
 var collect_anim_timer := 0.0
 var collect_anim_grow_timer := 0.0
 var collect_anim_grow_frame := 0
+
+var fire_anim_timer := 0.0
 
 var can_bug_jump := false
 
@@ -145,6 +150,9 @@ func _physics_process(delta):
 		
 		# Do animation
 		_do_animation(delta)
+		
+		# Does powerup stuff.
+		_do_powerup_actions(delta)
 		
 		# Other stuffs
 		_do_other()
@@ -273,6 +281,21 @@ func _do_vertical_movement():
 	if did_jump and not Input.is_action_pressed("a") and not is_on_floor():
 		did_jump = false
 
+func _do_powerup_actions(_delta):
+	if powerup.powerup_id == "fire" and len(get_tree().get_nodes_in_group("fireballs")) < Settings.max_fireballs:
+		if Input.is_action_just_pressed("b"):
+			fire_anim_timer = FIRE_ANIM_TIME
+			
+			var fireball = FIREBALL_SCENE.instantiate()
+			if sprite.flip_h:
+				fireball.direction = -1
+			
+			fireball.position = position + Vector2(8 * fireball.direction, -22)
+			fireball.z_index = -1
+			
+			Audio.play_sfx(SFX_FIREBALL)
+			get_parent().add_child(fireball)
+
 
 func _do_other():
 	if hit_block and is_on_floor():
@@ -358,6 +381,19 @@ func _do_animation(delta):
 		
 		if is_on_wall():
 			anim_speed = 1.7
+	
+	if fire_anim_timer > 0:
+		fire_anim_timer -= delta
+		
+		if anim == "walk":
+			anim_frame = sprite.frame
+			anim_frame_progress = sprite.frame_progress
+		else:
+			anim_frame = 0
+		
+		anim = "fire"
+		if not is_on_floor() and fire_anim_timer <= 0:
+			anim = "jump"
 	
 	if move != 0 and do_flip:
 		sprite.flip_h = move != 1
@@ -511,6 +547,9 @@ func jump():
 	
 
 func die(spawn_effect := true):
+	if not visible:
+		return
+	
 	if spawn_effect:
 		var sprite_frames = sprite.sprite_frames
 		
@@ -529,8 +568,12 @@ func die(spawn_effect := true):
 		Audio.play_sfx(SFX_DEATH_SEQUEL)
 	
 	Main.game_paused = true
+	visible = false
 	
-	queue_free()
+	await get_tree().create_timer(4.0, false).timeout
+	
+	Main.game_paused = false
+	get_tree().reload_current_scene()
 
 
 func _set_character(value: Character):
