@@ -12,9 +12,4 @@ res://scenes/game/hud/hud.tscn
 res://scenes/objects/items/mushroom/mushroom.tscn
 res://scenes/objects/base/item/item.tscn
 res://scenes/objects/items/fire_flower/fire_flower.tscn
-res://scenes/objects/other/fireball/fireball.gd
-res://scenes/game/player/player.gd
 res://scenes/effects/fireball_particle/fireball_particle.tscn
-res://scenes/effects/fireball_particle/fireball_particle.gd
-res://scripts/singletons/settings.gd
-res://scenes/objects/items/fire_flower/fire_flower.gd
