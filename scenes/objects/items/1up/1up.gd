@@ -4,7 +4,7 @@ extends Item
 const SFX_1UP := preload("res://assets/sounds/1up.wav")
 
 
-func collected(player):
+func collected(_player):
 	var level = Main.get_level()
 	if level != null:
 		level.spawn_points(position, 1)

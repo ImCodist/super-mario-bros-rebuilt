@@ -116,8 +116,8 @@ func spawn_points(spawn_position: Vector2, points: int):
 	var offset = (camera.position - (get_viewport_rect().size / 2))
 	if offset.x < 0:
 		offset.x = 0
-	if offset.y < 0:
-		offset.y = 0
+	
+	offset.y *= 2
 	
 	points_scene.position = spawn_position - offset
 	points_scene.points = points

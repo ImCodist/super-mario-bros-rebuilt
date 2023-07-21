@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1689965848
+::res://::1689980371
 default_bus_layout.tres::AudioBusLayout::9145009218541227829::1689878092::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1689898419::0::1::::<><>::
 icon.png::CompressedTexture2D::7909901887264004834::1689379222::1689379223::1::::<><>::
@@ -35,7 +35,7 @@ overworld.tres::Resource/Resource::384365069407198665::1689533197::0::1::::<><>:
 ::res://assets/resources/tilesets/::1689964979
 base.tres::TileSet::7217241880296715452::1689964979::0::1::::<><>::uid://m7mhh6ci88tk::::res://assets/sprites/themes/base_tileset.png
 overworld.tres::TileSet::4025021482479852754::1689964979::0::1::::<><>::uid://kcx3scsrb7h1::::res://assets/sprites/themes/overworld/overworld_tileset.png
-::res://assets/sounds/::1689966421
+::res://assets/sounds/::1689966422
 1up.wav::AudioStreamWAV::1888595530075644068::1689966408::1689966422::1::::<><>::
 brick_break.wav::AudioStreamWAV::1804318277293985079::1689666245::1689666252::1::::<><>::
 bump.wav::AudioStreamWAV::4049601038409067992::1689322593::1689322636::1::::<><>::
@@ -116,8 +116,8 @@ hud.tscn::PackedScene::2694834549347088879::1689965996::0::1::::<><>::res://scri
 player.gd::GDScript::-1::1689965927::0::1::::<>CharacterBody2D<>::
 player.tscn::PackedScene::5582549764847893355::1689965996::0::1::::<><>::res://scenes/game/player/player.gd<>uid://wbp0lcv0cu5v::::res://assets/sprites/player_mario.png<>uid://bmfwmxwqe2n1l::::res://assets/sounds/other/gagnum_style.ogg
 ::res://scenes/levels/::1688765935
-::res://scenes/levels/test_level/::1689965996
-test_level.tscn::PackedScene::7178680579636560323::1689965996::0::1::::<><>::res://scripts/nodes/level.gd<>uid://clsh1qscgkcox::::res://scenes/game/player/player.tscn<>uid://da3c6iy2nxmbc::::res://assets/resources/tilesets/base.tres<>res://scripts/nodes/levelmap.gd<>uid://d3wxyy12a4jgn::::res://scenes/objects/items/mushroom/mushroom.tscn<>uid://dwpmfpiscqyvd::::res://assets/sprites/other/levelref.png<>uid://gshs0p4wrbvo::::res://scenes/objects/items/fire_flower/fire_flower.tscn<>uid://bj5ehb3xmyexf::::res://scenes/objects/blocks/question_block/question_block.tscn
+::res://scenes/levels/test_level/::1689966542
+test_level.tscn::PackedScene::7178680579636560323::1689966542::0::1::::<><>::res://scripts/nodes/level.gd<>uid://clsh1qscgkcox::::res://scenes/game/player/player.tscn<>uid://da3c6iy2nxmbc::::res://assets/resources/tilesets/base.tres<>res://scripts/nodes/levelmap.gd<>uid://d3wxyy12a4jgn::::res://scenes/objects/items/mushroom/mushroom.tscn<>uid://dwpmfpiscqyvd::::res://assets/sprites/other/levelref.png<>uid://gshs0p4wrbvo::::res://scenes/objects/items/fire_flower/fire_flower.tscn<>uid://bj5ehb3xmyexf::::res://scenes/objects/blocks/question_block/question_block.tscn<>uid://bv1oqxilal3vq::::res://scenes/objects/items/1up/1up.tscn
 ::res://scenes/objects/::1689876427
 ::res://scenes/objects/areas/::1689468681
 ::res://scenes/objects/areas/whirlpool/::1689533128
@@ -138,9 +138,9 @@ brick.tscn::PackedScene::8679465041600782339::1689965996::0::1::::<><>::uid://dy
 question_block.gd::GDScript::-1::1689599725::0::1::::<>Block<>::
 question_block.tscn::PackedScene::3080307074425459203::1689965996::0::1::::<><>::uid://dygqjlsaqhghg::::res://scenes/objects/base/block/block.tscn<>res://scenes/objects/blocks/question_block/question_block.gd<>uid://c1hfecpeba4dj::::res://assets/sprites/themes/overworld/question_block.png
 ::res://scenes/objects/items/::1689966194
-::res://scenes/objects/items/1up/::1689966400
-1up.tscn::PackedScene::3914940053194287874::1689966400::0::1::::<><>::uid://c1347bl1g3pr::::res://scenes/objects/base/item/item.tscn<>uid://b4bdfdg0unf0k::::res://assets/sprites/themes/overworld/1up.png<>res://scenes/objects/items/1up/1up.gd
-1up.gd::GDScript::-1::1689966400::0::1::::<>Item<>::
+::res://scenes/objects/items/1up/::1689966503
+1up.gd::GDScript::-1::1689966445::0::1::::<>Item<>::
+1up.tscn::PackedScene::3914940053194287874::1689966503::0::1::::<><>::uid://c1347bl1g3pr::::res://scenes/objects/base/item/item.tscn<>uid://b4bdfdg0unf0k::::res://assets/sprites/themes/overworld/1up.png<>res://scenes/objects/items/1up/1up.gd
 ::res://scenes/objects/items/fire_flower/::1689965997
 fire_flower.gd::GDScript::-1::1689899477::0::1::::<>Item<>::
 fire_flower.tscn::PackedScene::458750362244440228::1689965997::0::1::::<><>::uid://c1347bl1g3pr::::res://scenes/objects/base/item/item.tscn<>uid://dp2lsjnn80s2h::::res://assets/resources/powerups/fire.tres<>uid://cn4fsh8y0q3gd::::res://assets/sprites/themes/overworld/fire_flower.png<>res://scenes/objects/items/fire_flower/fire_flower.gd
