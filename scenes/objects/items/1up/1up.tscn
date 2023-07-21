@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv1oqxilal3vq"]
+
+[ext_resource type="PackedScene" uid="uid://c1347bl1g3pr" path="res://scenes/objects/base/item/item.tscn" id="1_ob2ly"]
+[ext_resource type="Texture2D" uid="uid://b4bdfdg0unf0k" path="res://assets/sprites/themes/overworld/1up.png" id="2_4tg81"]
+[ext_resource type="Script" path="res://scenes/objects/items/1up/1up.gd" id="2_mirai"]
+
+[node name="1UP" instance=ExtResource("1_ob2ly")]
+script = ExtResource("2_mirai")
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_4tg81")

@@ -282,7 +282,7 @@ func _do_vertical_movement():
 		did_jump = false
 
 func _do_powerup_actions(_delta):
-	if powerup.powerup_id == "fire" and len(get_tree().get_nodes_in_group("fireballs")) < Settings.max_fireballs:
+	if powerup.powerup_id == "fire" and len(get_tree().get_nodes_in_group("fireballs")) < Settings.max_fireballs and not crouching:
 		if Input.is_action_just_pressed("b"):
 			fire_anim_timer = FIRE_ANIM_TIME
 			

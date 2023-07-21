@@ -58,15 +58,16 @@ func _physics_process(delta):
 
 
 func collected(player):
-	if player.powerup.powerup_level < powerup.powerup_level:
-		player.powerup = powerup
-		player.collect_anim_timer = player.COLLECT_ANIM_TIME
-		Main.game_paused = true
+	if powerup != null:
+		if player.powerup.powerup_level < powerup.powerup_level:
+			player.powerup = powerup
+			player.collect_anim_timer = player.COLLECT_ANIM_TIME
+			Main.game_paused = true
 	
-	var level := Main.get_level()
-	if level != null:
-		level.add_points(powerup.points, true, position)
-	
+		var level := Main.get_level()
+		if level != null:
+			level.add_points(powerup.points, true, position)
+		
 	Audio.play_sfx(SFX_ITEM_COLLECT)
 
 

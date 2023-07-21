@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dajn25kggdwqt"]
+[gd_scene load_steps=10 format=3 uid="uid://dajn25kggdwqt"]
 
 [ext_resource type="Script" path="res://scripts/nodes/level.gd" id="1_tg30h"]
 [ext_resource type="PackedScene" uid="uid://clsh1qscgkcox" path="res://scenes/game/player/player.tscn" id="2_cpexs"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dwpmfpiscqyvd" path="res://assets/sprites/other/levelref.png" id="6_cb0yb"]
 [ext_resource type="PackedScene" uid="uid://gshs0p4wrbvo" path="res://scenes/objects/items/fire_flower/fire_flower.tscn" id="7_prwlp"]
 [ext_resource type="PackedScene" uid="uid://bj5ehb3xmyexf" path="res://scenes/objects/blocks/question_block/question_block.tscn" id="7_yium3"]
+[ext_resource type="PackedScene" uid="uid://bv1oqxilal3vq" path="res://scenes/objects/items/1up/1up.tscn" id="8_fim7l"]
 
 [node name="test_level" type="Node2D"]
 script = ExtResource("1_tg30h")
@@ -38,7 +39,7 @@ item_secondary = ExtResource("6_87rwa")
 
 [node name="QuestionBlock2" parent="." instance=ExtResource("7_yium3")]
 position = Vector2(1032, 128)
-item = ExtResource("6_87rwa")
+item = ExtResource("8_fim7l")
 invisible = true
 
 [node name="Item" parent="." instance=ExtResource("7_prwlp")]

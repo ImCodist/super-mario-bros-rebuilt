@@ -13,3 +13,7 @@ res://scenes/objects/items/mushroom/mushroom.tscn
 res://scenes/objects/base/item/item.tscn
 res://scenes/objects/items/fire_flower/fire_flower.tscn
 res://scenes/effects/fireball_particle/fireball_particle.tscn
+res://scenes/game/player/player.gd
+res://scenes/objects/items/1up/1up.tscn
+res://scenes/objects/base/item/item.gd
+res://scenes/objects/items/1up/1up.gd
