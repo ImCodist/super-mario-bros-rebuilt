@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dygqjlsaqhghg"]
+[gd_scene load_steps=6 format=3 uid="uid://dygqjlsaqhghg"]
 
 [ext_resource type="Script" path="res://scenes/objects/base/block/block.gd" id="1_tpp8n"]
 [ext_resource type="Texture2D" uid="uid://cg5jotnm8noih" path="res://assets/sprites/themes/overworld/hit_block.png" id="2_2cduf"]
@@ -8,6 +8,9 @@ size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_335ls"]
 size = Vector2(14, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bnlm"]
+size = Vector2(14, 2.125)
 
 [node name="Block" type="StaticBody2D"]
 script = ExtResource("1_tpp8n")
@@ -26,5 +29,13 @@ collision_mask = 2
 [node name="Collision" type="CollisionShape2D" parent="PlayerDetection"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_335ls")
+
+[node name="TopDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="Collision" type="CollisionShape2D" parent="TopDetection"]
+position = Vector2(0, -8.0625)
+shape = SubResource("RectangleShape2D_2bnlm")
 
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]

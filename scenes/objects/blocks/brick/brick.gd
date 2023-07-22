@@ -35,6 +35,8 @@ func hit():
 			
 			Audio.play_sfx(SFX_BRICK_BREAK)
 			queue_free()
+			
+			_do_top_action()
 			return
 	
 	super()

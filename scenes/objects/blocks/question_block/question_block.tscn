@@ -10,6 +10,3 @@ script = ExtResource("2_vpbgm")
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("3_1bkwg")
 hframes = 3
-
-[node name="PlayerDetection" parent="." index="2"]
-priority = 1

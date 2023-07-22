@@ -55,6 +55,8 @@ func hit():
 		
 		sprite_velocity.y = -JUMP_SPEED
 		sprite.frame = 1
+		
+		_do_top_action()
 	
 	if item_count > 0:
 		item_count -= 1
@@ -94,6 +96,22 @@ func spawn_item():
 	
 	get_parent().call_deferred("add_child", item_scene)
 
+func _do_top_action():
+	var top_detection = $TopDetection
+	
+	# areas
+	if top_detection.has_overlapping_areas():
+		for area in top_detection.get_overlapping_areas():
+			if area.is_in_group("coins"):
+				area.collect()
+	
+	# bodies
+	if top_detection.has_overlapping_bodies():
+		for body in top_detection.get_overlapping_bodies():
+			if body is Item:
+				body.velocity.y = -200
+				body.direction = -body.direction
+
 
 func _on_player_detection_body_entered(body):
 	if is_empty:
@@ -103,7 +121,7 @@ func _on_player_detection_body_entered(body):
 		if body.is_on_floor():
 			return
 		
-		if invisible and body.position.y - body.velocity.y <= position.y:
+		if invisible and body.position.y <= position.y + 16:
 			return
 		
 		if body.hit_block:
