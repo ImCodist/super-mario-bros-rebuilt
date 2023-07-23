@@ -6,6 +6,7 @@
 
 [node name="Brick" instance=ExtResource("1_bfull")]
 script = ExtResource("2_8hxpk")
+item_count = 0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("3_rprpc")

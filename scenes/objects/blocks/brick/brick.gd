@@ -5,10 +5,6 @@ const BRICK_PARTICLE := preload("res://scenes/effects/brick_particle/brick_parti
 const SFX_BRICK_BREAK := preload("res://assets/sounds/brick_break.wav")
 
 
-func _ready():
-	item_count = 0
-
-
 func hit():
 	if last_hit_body.is_in_group("players"):
 		if last_hit_body.powerup.powerup_level >= 1 and item_count <= 0:
