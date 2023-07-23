@@ -1,3 +1,4 @@
+TextureRect
 SpriteThemed
 CollisionShape2D
 Area2D
@@ -16,7 +17,6 @@ CSGBox3D
 Camera2D
 Control
 ColorRect
-TextureRect
 SpriteLabel
 RayCast2D
 CollisionPolygon2D

@@ -19,3 +19,5 @@ res://scenes/objects/items/fire_flower/fire_flower.tscn
 res://scenes/objects/items/mushroom/mushroom.tscn
 res://scripts/singletons/settings.gd
 res://scenes/effects/points_effect/points_effect.tscn
+res://scripts/nodes/level.gd
+res://scenes/objects/base/item/item.gd

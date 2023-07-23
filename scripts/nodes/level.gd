@@ -16,6 +16,8 @@ const POINTS_SCENE = preload("res://scenes/effects/points_effect/points_effect.t
 
 const SFX_TIME_WARNING = preload("res://assets/sounds/time_warning.wav")
 
+const BARRIER_TEXTURE = preload("res://assets/sprites/objects/barrier.png")
+
 const SCREEN_SIZE = Vector2(256, 224)
 
 
@@ -41,6 +43,7 @@ var score_canvas: CanvasLayer
 
 var camera: Camera2D
 var camera_collision: CollisionShape2D
+var barrier_texture: TextureRect
 
 var background: ColorRect
 
@@ -178,17 +181,24 @@ func _create_camera():
 			camera.position.x = player.position.x
 			break
 	
-	var camera_body = StaticBody2D.new()
+	var camera_body := StaticBody2D.new()
 	camera_body.set_collision_layer_value(1, false)
 	camera_body.set_collision_layer_value(2, true)
 	camera_body.set_collision_mask_value(1, false)
 	camera.add_child(camera_body)
 	
 	camera_collision = CollisionShape2D.new()
-	var collision_shape = RectangleShape2D.new()
+	var collision_shape := RectangleShape2D.new()
 	collision_shape.size = Vector2(16, SCREEN_SIZE.y * 4)
 	camera_collision.shape = collision_shape
 	camera_body.add_child(camera_collision)
+	
+	barrier_texture = TextureRect.new()
+	barrier_texture.texture = BARRIER_TEXTURE
+	barrier_texture.stretch_mode = TextureRect.STRETCH_TILE
+	barrier_texture.size = collision_shape.size
+	barrier_texture.position = -barrier_texture.size / 2
+	camera_collision.add_child(barrier_texture)
 
 func _update_camera(delta):
 	if Main.game_paused:
@@ -232,6 +242,15 @@ func _update_camera(delta):
 					camera.position.y = player.position.y + vertical_threshold
 				elif camera.position.y + vertical_threshold <= player.position.y:
 					camera.position.y = player.position.y - vertical_threshold
+			
+			# Barrier fade
+			var barrier_offset = 48
+			var barrier_percent = 0.0
+			if Settings.invisible_wall_barrier and player.position.x <= barrier_texture.global_position.x + barrier_offset:
+				var player_offset = 8
+				barrier_percent = 1 - ((player.position.x - barrier_texture.global_position.x - player_offset) / barrier_offset)
+		
+			barrier_texture.modulate.a = barrier_percent
 	
 	# Collision position.
 	#var viewport_size := get_viewport_rect().size

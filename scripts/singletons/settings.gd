@@ -17,6 +17,10 @@ var max_fireballs := 2
 ## In SMB he is rendered in front of everything.
 var mario_behind_hud := false
 
+## Shows a barrier when you try to back track on right only / left only camera modes.
+## Mainly for widescreen players. This is a temporary solution to this problem.
+var invisible_wall_barrier := true
+
 
 # === HARD CODED BUGS ===
 ## In SMB multiple powerups cannot exist at the same time.
