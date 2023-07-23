@@ -39,9 +39,10 @@ func _process(delta):
 		sprite.position += sprite_velocity * delta
 	elif sprite.position >= sprite_start_position and sprite_velocity.y >= 0:
 		sprite.position = sprite_start_position
-		sprite_velocity.y = 0
 		
-		landed()
+		if sprite_velocity.y != 0:
+			landed()
+		sprite_velocity.y = 0
 
 
 func hit():
