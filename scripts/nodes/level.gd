@@ -244,12 +244,12 @@ func _update_camera(delta):
 					camera.position.y = player.position.y - vertical_threshold
 			
 			# Barrier fade
-			var barrier_offset = 48
+			var barrier_offset = 32
 			var barrier_percent = 0.0
-			if Settings.invisible_wall_barrier and player.position.x <= barrier_texture.global_position.x + barrier_offset:
-				var player_offset = 8
-				barrier_percent = 1 - ((player.position.x - barrier_texture.global_position.x - player_offset) / barrier_offset)
-		
+			var player_to_barrier = player.position.x - barrier_texture.global_position.x - 22
+			if Settings.invisible_wall_barrier and player_to_barrier <= barrier_offset:
+				barrier_percent = 1 - (player_to_barrier / barrier_offset)
+			
 			barrier_texture.modulate.a = barrier_percent
 	
 	# Collision position.
