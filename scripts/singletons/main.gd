@@ -63,6 +63,9 @@ func _physics_process(_delta):
 
 
 func get_level() -> Level:
+	if not is_inside_tree():
+		return null
+	
 	for level in get_tree().get_nodes_in_group("levels"):
 		return level
 	

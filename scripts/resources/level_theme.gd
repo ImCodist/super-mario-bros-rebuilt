@@ -9,3 +9,5 @@ extends Resource
 @export var background_color := Color("9494ff")
 
 @export var tileset: TileSet
+
+@export_dir var theme_assets_dir := ""

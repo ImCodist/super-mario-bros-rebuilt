@@ -8,3 +8,4 @@ script = ExtResource("1_g40v2")
 music = "overworld"
 background_color = Color(0.580392, 0.580392, 1, 1)
 tileset = ExtResource("2_24kb2")
+theme_assets_dir = "res://assets/sprites/themes/overworld"

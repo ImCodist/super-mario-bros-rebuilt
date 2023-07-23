@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dajn25kggdwqt"]
+[gd_scene load_steps=13 format=3 uid="uid://dajn25kggdwqt"]
 
 [ext_resource type="Script" path="res://scripts/nodes/level.gd" id="1_tg30h"]
+[ext_resource type="Resource" uid="uid://dmwmtwgfleflp" path="res://assets/resources/themes/underground.tres" id="2_cf1b0"]
 [ext_resource type="PackedScene" uid="uid://clsh1qscgkcox" path="res://scenes/game/player/player.tscn" id="2_cpexs"]
+[ext_resource type="PackedScene" uid="uid://dygqjlsaqhghg" path="res://scenes/objects/base/block/block.tscn" id="3_imipf"]
 [ext_resource type="TileSet" uid="uid://da3c6iy2nxmbc" path="res://assets/resources/tilesets/base.tres" id="4_fx7hy"]
 [ext_resource type="Script" path="res://scripts/nodes/levelmap.gd" id="4_iti1o"]
 [ext_resource type="PackedScene" uid="uid://d3wxyy12a4jgn" path="res://scenes/objects/items/mushroom/mushroom.tscn" id="6_87rwa"]
@@ -13,6 +15,7 @@
 
 [node name="test_level" type="Node2D"]
 script = ExtResource("1_tg30h")
+level_theme = ExtResource("2_cf1b0")
 
 [node name="Levelref" type="Sprite2D" parent="."]
 visible = false
@@ -20,6 +23,10 @@ modulate = Color(1, 1, 1, 0.67451)
 position = Vector2(0, -8)
 texture = ExtResource("6_cb0yb")
 centered = false
+
+[node name="Block" parent="." instance=ExtResource("3_imipf")]
+z_index = -20
+position = Vector2(3288, 192)
 
 [node name="QuestionBlock" parent="." instance=ExtResource("7_yium3")]
 position = Vector2(344, 144)

@@ -399,8 +399,8 @@ func _do_animation(delta):
 		sprite.flip_h = move != 1
 		
 	# secret
-	if Settings.gamer_style and powerup.powerup_level == 1:
-		if Input.is_key_pressed(KEY_ALT):
+	if Settings.gamer_style:
+		if Input.is_key_pressed(KEY_ALT) and powerup.powerup_level <= 1:
 			sprite.flip_h = false
 			anim_speed = 3
 			anim = "gagng"
@@ -411,7 +411,7 @@ func _do_animation(delta):
 		elif $SecretSong.playing:
 			$SecretSong.stop()
 			Audio.resume_music()
-	
+
 	sprite.speed_scale = anim_speed
 	if anim != "":
 		sprite.play(anim)

@@ -10,3 +10,4 @@ item_count = 0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("3_rprpc")
+texture_name = "brick"

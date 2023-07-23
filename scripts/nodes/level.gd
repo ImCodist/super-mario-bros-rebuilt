@@ -74,6 +74,8 @@ func _ready():
 		if child is LevelMap:
 			child.tile_set = level_theme.tileset
 			child.z_index = -2
+	
+	get_tree().call_group("_sprite_themed", "update_sprite")
 
 func _process(delta):
 	if get_tree().paused:
@@ -232,6 +234,7 @@ func _update_camera(delta):
 					camera.position.y = player.position.y - vertical_threshold
 	
 	# Collision position.
+	#var viewport_size := get_viewport_rect().size
 	match camera_type:
 		CameraTypes.LEFT_ONLY:
 			camera_collision.position.x = (SCREEN_SIZE.x / 2) + 8

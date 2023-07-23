@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dygqjlsaqhghg"]
+[gd_scene load_steps=7 format=3 uid="uid://dygqjlsaqhghg"]
 
 [ext_resource type="Script" path="res://scenes/objects/base/block/block.gd" id="1_tpp8n"]
 [ext_resource type="Texture2D" uid="uid://cg5jotnm8noih" path="res://assets/sprites/themes/overworld/hit_block.png" id="2_2cduf"]
+[ext_resource type="Script" path="res://scripts/nodes/sprite_themed.gd" id="3_wbho7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d3fcb"]
 size = Vector2(16, 16)
@@ -18,6 +19,8 @@ script = ExtResource("1_tpp8n")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_2cduf")
 hframes = 2
+script = ExtResource("3_wbho7")
+texture_name = "hit_block"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d3fcb")

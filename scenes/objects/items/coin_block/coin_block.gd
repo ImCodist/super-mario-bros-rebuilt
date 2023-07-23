@@ -24,6 +24,8 @@ func _ready():
 	position.y -= 16
 	start_position = position
 	
+	z_index = 1
+	
 	await get_tree().create_timer(0.1, false).timeout
 	
 	var level = Main.get_level()

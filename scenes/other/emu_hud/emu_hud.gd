@@ -2,7 +2,7 @@ extends CanvasLayer
 
 
 func _ready():
-	visible = true
+	visible = false
 
 
 func _process(_delta):

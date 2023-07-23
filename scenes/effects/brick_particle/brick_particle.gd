@@ -1,4 +1,4 @@
-extends Sprite2D
+extends SpriteThemed
 
 
 const GRAVITY = 1000
@@ -14,6 +14,7 @@ var velocity := Vector2.ZERO
 
 
 func _ready():
+	texture_name = "brick_particles"
 	z_index = 1
 
 

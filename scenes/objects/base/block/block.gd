@@ -2,8 +2,6 @@ class_name Block
 extends StaticBody2D
 
 
-const EMPTY_BLOCK_TEXTURE = preload("res://assets/sprites/themes/overworld/hit_block.png")
-
 const JUMP_SPEED = 140
 const GRAVITY = 1200
 
@@ -69,12 +67,11 @@ func hit():
 		if item_count <= 0:
 			is_empty = true
 			
-			sprite.texture = EMPTY_BLOCK_TEXTURE
+			sprite.texture_name = "hit_block"
 			sprite.hframes = 2
 
 func landed():
-	if item_count <= 0:
-		sprite.frame = 0
+	sprite.frame = 0
 	
 	if queue_item_spawn:
 		spawn_item()
