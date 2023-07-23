@@ -9,3 +9,4 @@ script = ExtResource("2_mirai")
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource("2_4tg81")
+texture_name = "1up"

@@ -13,3 +13,4 @@ move_horizontally = false
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource("2_hhq3m")
 hframes = 4
+texture_name = "fire_flower"

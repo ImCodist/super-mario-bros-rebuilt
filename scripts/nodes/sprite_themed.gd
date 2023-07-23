@@ -13,7 +13,7 @@ func _ready():
 
 func update_sprite():
 	if texture_name == "":
-		return
+		texture_name = "overworld"
 	
 	var level = Main.get_level()
 	if level == null:
@@ -25,7 +25,9 @@ func update_sprite():
 	if theme.theme_assets_dir == "":
 		return
 	
-	texture = load(theme.theme_assets_dir.path_join("%s.png" % texture_name))
+	var file_path = theme.theme_assets_dir.path_join("%s.png" % texture_name)
+	if FileAccess.file_exists(file_path):
+		texture = load(file_path)
 
 
 func _set_texture_name(value):

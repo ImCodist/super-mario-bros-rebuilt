@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1347bl1g3pr"]
+[gd_scene load_steps=6 format=3 uid="uid://c1347bl1g3pr"]
 
 [ext_resource type="Texture2D" uid="uid://cq2wbsmqoxass" path="res://assets/sprites/themes/overworld/mushroom.png" id="1_dn6io"]
 [ext_resource type="Script" path="res://scenes/objects/base/item/item.gd" id="1_x22ec"]
+[ext_resource type="Script" path="res://scripts/nodes/sprite_themed.gd" id="3_w5a6c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xbep"]
 size = Vector2(12, 12)
@@ -18,6 +19,8 @@ scale = Vector2(0.8, 0.8)
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_dn6io")
+script = ExtResource("3_w5a6c")
+texture_name = "mushroom"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
