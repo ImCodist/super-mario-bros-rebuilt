@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Character" load_steps=335 format=3 uid="uid://kgdk5i5x0ik8"]
+[gd_resource type="Resource" script_class="Character" load_steps=339 format=3 uid="uid://kgdk5i5x0ik8"]
 
 [ext_resource type="Texture2D" uid="uid://wbp0lcv0cu5v" path="res://assets/sprites/player_mario.png" id="1_5i6hy"]
 [ext_resource type="Script" path="res://scripts/resources/character_powerup.gd" id="1_mom4b"]
@@ -681,7 +681,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"climb",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1225,6 +1225,14 @@ animations = [{
 script = ExtResource("1_mom4b")
 powerup_id = "small"
 sprite_frames = SubResource("SpriteFrames_gkb8w")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olrpu"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(112, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pt3x"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(128, 32, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_86vd7"]
 atlas = ExtResource("1_5i6hy")
@@ -1794,6 +1802,17 @@ region = Rect2(48, 32, 16, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_olrpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pt3x")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_86vd7")
 }],
 "loop": true,
@@ -2261,6 +2280,14 @@ script = ExtResource("1_mom4b")
 powerup_id = "big"
 sprite_frames = SubResource("SpriteFrames_1cd4p")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hglj"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(112, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jriur"]
+atlas = ExtResource("1_5i6hy")
+region = Rect2(128, 64, 16, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1out"]
 atlas = ExtResource("1_5i6hy")
 region = Rect2(96, 64, 16, 32)
@@ -2327,6 +2354,17 @@ region = Rect2(48, 64, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g06ei"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hglj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jriur")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w1out")

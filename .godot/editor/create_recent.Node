@@ -1,8 +1,8 @@
-TextureRect
 SpriteThemed
+Sprite2D
 CollisionShape2D
 Area2D
-Sprite2D
+TextureRect
 AnimatedSprite2D
 VisibleOnScreenNotifier2D
 CharacterBody2D

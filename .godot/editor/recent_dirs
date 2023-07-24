@@ -1,3 +1,4 @@
+res://assets/sprites
 C:/Users/jacob/Documents/Projects/Godot/my-smb-remake/.export/Web
 res://scenes/objects/items/star
 res://assets/resources/tilesets
@@ -8,7 +9,6 @@ res://scripts/nodes
 res://scenes/objects/items/1up
 C:/Users/jacob/Documents/Projects/Godot/my-smb-remake/.export/Windows
 res://assets/sprites/effects
-res://assets/sprites
 res://scenes/objects/items/fire_flower
 res://scripts/singletons
 res://scenes/objects/items/mushroom

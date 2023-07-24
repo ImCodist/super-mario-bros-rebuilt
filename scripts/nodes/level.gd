@@ -176,10 +176,15 @@ func _create_camera():
 	camera.limit_bottom = int(SCREEN_SIZE.y)
 	add_child(camera)
 	
-	if camera_type == CameraTypes.LEFT_ONLY:
-		for player in get_tree().get_nodes_in_group("players"):
-			camera.position.x = player.position.x
-			break
+	for player in get_tree().get_nodes_in_group("players"):
+		var offset = 0
+		if camera_type == CameraTypes.RIGHT_ONLY:
+			offset = 16
+		elif camera_type == CameraTypes.LEFT_ONLY:
+			offset = -16
+		
+		camera.position.x = player.position.x + offset
+		break
 	
 	var camera_body := StaticBody2D.new()
 	camera_body.set_collision_layer_value(1, false)

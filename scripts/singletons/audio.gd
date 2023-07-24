@@ -74,14 +74,21 @@ func stop_music():
 		player.stop()
 
 func resume_music():
-	for player in mus_players:
-		if player.playing:
-			return
+	if music_is_playing():
+		return
 	
 	if song == "":
 		return
 	
 	play_music(song, song_speed, stopped_position)
+
+
+func music_is_playing():
+	for player in mus_players:
+		if player.playing:
+			return true
+	
+	return false
 
 
 func play_sfx(audio: AudioStream, force := false):

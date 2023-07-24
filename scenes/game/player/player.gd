@@ -88,6 +88,7 @@ var skidding = false
 var running = false
 var swimming = false: set = _set_swimming
 var in_whirlpool = false: set = _set_in_whirlpool
+var disabled = false
 
 var can_crouch = false
 var crouching = false
@@ -132,6 +133,9 @@ func _ready():
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():
+		return
+	
+	if disabled:
 		return
 	
 	if not Main.game_paused:

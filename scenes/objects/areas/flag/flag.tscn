@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://swcw0rkv4q15"]
+
+[ext_resource type="Script" path="res://scenes/objects/areas/flag/flag.gd" id="1_mipsr"]
+[ext_resource type="Script" path="res://scripts/nodes/sprite_themed.gd" id="2_3a4o8"]
+[ext_resource type="Texture2D" uid="uid://bu1e8jsg7weyk" path="res://assets/sprites/themes/overworld/flag.png" id="2_8xtox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82qau"]
+size = Vector2(16, 160)
+
+[node name="flag" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_mipsr")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -72)
+shape = SubResource("RectangleShape2D_82qau")
+
+[node name="SpriteFlag" type="Sprite2D" parent="."]
+position = Vector2(-8, -16)
+texture = ExtResource("2_8xtox")
+script = ExtResource("2_3a4o8")
+texture_name = "flag"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

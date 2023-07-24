@@ -9,3 +9,10 @@ res://scenes/objects/base/block/block.tscn
 res://scenes/levels/test_level/test_level.tscn
 res://scripts/nodes/level.gd
 res://scripts/singletons/audio.gd
+res://scripts/nodes/sprite_themed.gd
+res://scripts/resources/character_powerup.gd
+res://scenes/game/player/player.tscn
+res://scenes/objects/areas/flag/flag.tscn
+res://scenes/objects/areas/flag/flag.gd
+res://scenes/game/player/player.gd
+res://scripts/singletons/main.gd

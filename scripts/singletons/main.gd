@@ -13,7 +13,8 @@ var emu_hud: CanvasLayer
 
 var turbo_toggle = false
 
-var pause_sound_playing = false
+var pause_sound_playing := false
+var pause_music_was_playing := true
 
 
 var game_paused := false
@@ -44,13 +45,14 @@ func _unhandled_input(event):
 		Audio.play_sfx(SFX_PAUSE, true)
 		
 		if not get_tree().paused:
+			pause_music_was_playing = Audio.music_is_playing()
 			Audio.stop_music()
 		
 		pause_sound_playing = true
 		await Audio.sfx_player.finished
 		pause_sound_playing = false
 		
-		if not get_tree().paused:
+		if not get_tree().paused and pause_music_was_playing:
 			Audio.resume_music()
 
 func _physics_process(_delta):
