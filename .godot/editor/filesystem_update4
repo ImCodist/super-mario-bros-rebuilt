@@ -1,6 +1,11 @@
-res://scenes/levels/test_level/test_level.tscn
+res://scenes/objects/items/star/star.tscn
 res://assets/resources/tilesets/overworld.tres
 res://assets/resources/tilesets/base.tres
-res://assets/resources/tilesets/underground.tres
 res://assets/resources/characters/mario.tres
+res://scenes/objects/items/fire_flower/fire_flower.tscn
+res://scenes/objects/items/mushroom/mushroom.tscn
+res://scenes/objects/blocks/question_block/question_block.tscn
+res://scenes/objects/base/block/block.tscn
+res://scenes/levels/test_level/test_level.tscn
 res://scripts/nodes/level.gd
+res://scripts/singletons/audio.gd

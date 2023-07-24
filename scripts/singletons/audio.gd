@@ -56,6 +56,10 @@ func play_music(music_name: String, speed: float = 1.0, position: float = 0.0):
 		
 		player.stream = load(music_path + "_%s.ogg" % (i + 1))
 		player.pitch_scale = speed
+		
+		if position < 0.0:
+			position = 0.0
+		
 		player.play(position)
 		
 		if i == 0:

@@ -155,7 +155,7 @@ func _start_time_warning():
 	var previous_position = Audio.song_position
 	
 	Audio.stop_music()
-	Audio.play_sfx(SFX_TIME_WARNING, true)
+	Audio.play_sfx(SFX_TIME_WARNING)
 	
 	time_warning_happened = true
 	

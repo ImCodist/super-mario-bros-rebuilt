@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://dajn25kggdwqt"]
 
 [ext_resource type="Script" path="res://scripts/nodes/level.gd" id="1_tg30h"]
-[ext_resource type="Resource" uid="uid://dmwmtwgfleflp" path="res://assets/resources/themes/underground.tres" id="2_cf1b0"]
 [ext_resource type="PackedScene" uid="uid://clsh1qscgkcox" path="res://scenes/game/player/player.tscn" id="2_cpexs"]
 [ext_resource type="PackedScene" uid="uid://dygqjlsaqhghg" path="res://scenes/objects/base/block/block.tscn" id="3_imipf"]
 [ext_resource type="TileSet" uid="uid://da3c6iy2nxmbc" path="res://assets/resources/tilesets/base.tres" id="4_fx7hy"]
 [ext_resource type="Script" path="res://scripts/nodes/levelmap.gd" id="4_iti1o"]
 [ext_resource type="PackedScene" uid="uid://d3wxyy12a4jgn" path="res://scenes/objects/items/mushroom/mushroom.tscn" id="6_87rwa"]
 [ext_resource type="Texture2D" uid="uid://dwpmfpiscqyvd" path="res://assets/sprites/other/levelref.png" id="6_cb0yb"]
+[ext_resource type="PackedScene" uid="uid://cap0vlu0gatjx" path="res://scenes/objects/items/star/star.tscn" id="6_lurbd"]
 [ext_resource type="PackedScene" uid="uid://gshs0p4wrbvo" path="res://scenes/objects/items/fire_flower/fire_flower.tscn" id="7_prwlp"]
 [ext_resource type="PackedScene" uid="uid://bj5ehb3xmyexf" path="res://scenes/objects/blocks/question_block/question_block.tscn" id="7_yium3"]
 [ext_resource type="PackedScene" uid="uid://bv1oqxilal3vq" path="res://scenes/objects/items/1up/1up.tscn" id="8_fim7l"]
@@ -15,7 +15,7 @@
 
 [node name="test_level" type="Node2D"]
 script = ExtResource("1_tg30h")
-level_theme = ExtResource("2_cf1b0")
+timer = 100
 
 [node name="Levelref" type="Sprite2D" parent="."]
 visible = false
@@ -54,6 +54,7 @@ item_count = 10
 
 [node name="Brick2" parent="." instance=ExtResource("10_vdivs")]
 position = Vector2(1624, 144)
+item = ExtResource("6_lurbd")
 item_count = 1
 
 [node name="LevelMap" type="TileMap" parent="."]

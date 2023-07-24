@@ -32,7 +32,6 @@ func _ready():
 		collision.one_way_collision = true
 		collision.rotation_degrees = 180
 		
-
 func _process(delta):
 	if sprite.position.y < sprite_start_position.y or sprite_velocity.y < 0:
 		sprite_velocity.y += GRAVITY * delta

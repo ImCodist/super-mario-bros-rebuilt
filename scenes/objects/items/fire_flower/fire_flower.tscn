@@ -8,7 +8,7 @@
 [node name="Item" instance=ExtResource("1_1nfnb")]
 script = ExtResource("2_mys7e")
 powerup = ExtResource("2_07coy")
-move_horizontally = false
+movement_type = 2
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource("2_hhq3m")

@@ -2,6 +2,13 @@ class_name Item
 extends CharacterBody2D
 
 
+enum MovementType {
+	HORIZONTAL,
+	HOP,
+	STATIC,
+}
+
+
 const SFX_ITEM_APPEAR = preload("res://assets/sounds/item_appear.wav")
 const SFX_ITEM_COLLECT = preload("res://assets/sounds/powerup.wav")
 
@@ -9,6 +16,7 @@ const ITEM_BOX_SPEED = 20
 
 const GRAVITY = 1000
 const SPEED = 50
+const HOP_SPEED = 250
 
 
 var direction := 1
@@ -18,7 +26,7 @@ var from_block := false
 
 @export var powerup: Powerup = preload("res://assets/resources/powerups/big.tres")
 
-@export var move_horizontally := true
+@export var movement_type := MovementType.HORIZONTAL
 
 
 @onready var original_position := position
@@ -51,7 +59,9 @@ func _physics_process(delta):
 		
 		velocity.y += GRAVITY * delta
 		
-		if move_horizontally:
+		if movement_type == MovementType.HOP and is_on_floor():
+			velocity.y = -HOP_SPEED
+		if movement_type != MovementType.STATIC:
 			velocity.x = SPEED * direction
 		
 		move_and_slide()
