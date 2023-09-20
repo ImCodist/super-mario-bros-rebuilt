@@ -11,6 +11,9 @@ const GRAVITY = 1200
 
 @export var item_count := 1
 
+@export var use_timer := false
+@export var timer_end := 3.8
+
 @export var invisible := false
 
 
@@ -21,8 +24,14 @@ var is_empty := false
 
 var last_hit_body: PhysicsBody2D
 
+var started_timer := false
+var timer := 0.0
+
+
 @onready var sprite := $Sprite
 @onready var collision := $Collision
+@onready var player_detection = $PlayerDetection
+@onready var player_detection_collision = $PlayerDetection/Collision
 @onready var sprite_start_position = sprite.position
 
 
@@ -32,7 +41,12 @@ func _ready():
 		collision.one_way_collision = true
 		collision.rotation_degrees = 180
 		
+		player_detection_collision.one_way_collision = true
+		player_detection_collision.rotation_degrees = 180
+		
 func _process(delta):
+	player_detection.priority = item_count
+	
 	if sprite.position.y < sprite_start_position.y or sprite_velocity.y < 0:
 		sprite_velocity.y += GRAVITY * delta
 		sprite.position += sprite_velocity * delta
@@ -42,6 +56,9 @@ func _process(delta):
 		if sprite_velocity.y != 0:
 			landed()
 		sprite_velocity.y = 0
+	
+	if started_timer and timer < timer_end:
+		timer += delta
 
 
 func hit():
@@ -57,7 +74,9 @@ func hit():
 		_do_top_action()
 	
 	if item_count > 0:
-		item_count -= 1
+		started_timer = true
+		if not use_timer or timer >= timer_end:
+			item_count -= 1
 		
 		if not item.instantiate() is Item:
 			spawn_item()

@@ -19,10 +19,10 @@ func update_sprite():
 	var theme = level.level_theme
 	if theme == null:
 		return
-	if theme.theme_assets_dir == "":
+	if theme.assets_dir == "":
 		return
 	
-	var file_path = theme.theme_assets_dir.path_join("%s.png" % texture_name)
+	var file_path = theme.assets_dir.path_join("%s.png" % texture_name)
 	texture = load(file_path)
 
 

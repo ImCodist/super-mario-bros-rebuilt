@@ -82,13 +82,20 @@ const FIRE_ANIM_TIME = 0.1
 
 var previous_powerup: Powerup
 
+var powerup_colors := []
+
 
 var did_jump = false
 var skidding = false
 var running = false
 var swimming = false: set = _set_swimming
 var in_whirlpool = false: set = _set_in_whirlpool
+
 var disabled = false
+var allow_input = true
+var force_unpause = false
+
+var force_move = null
 
 var can_crouch = false
 var crouching = false
@@ -115,6 +122,16 @@ var current_fall_gravity = DEFAULT_GRAVITY
 
 var hit_block := false
 
+var starman_enabled := true:
+	set = _set_starman_enabled
+var starman_timer := 0.0
+
+
+var default_palette: Array[Color]:
+	set = _set_default_palette
+var current_palette: Array[Color]:
+	set = _set_current_palette
+
 
 @onready var sprite := $Sprite
 
@@ -128,8 +145,7 @@ func _ready():
 		sprite.play("walk", 0)
 		
 	# Update the powerup and gravity values.
-	_set_powerup(powerup)
-
+	_set_character(character)
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():
@@ -138,7 +154,7 @@ func _physics_process(delta):
 	if disabled:
 		return
 	
-	if not Main.game_paused:
+	if not Main.game_paused or force_unpause:
 		# Gravity
 		_do_gravity(delta)
 		
@@ -189,9 +205,9 @@ func _do_gravity(delta):
 			
 func _do_crouch():
 	var previous_crouch = crouching
-	if not crouching and is_on_floor() and Input.is_action_pressed("down"):
+	if not crouching and is_on_floor() and Input.is_action_pressed("down") and allow_input:
 		crouching = true
-	if is_on_floor() and not Input.is_action_pressed("down") and _can_uncrouch():
+	if is_on_floor() and not Input.is_action_pressed("down") and allow_input and _can_uncrouch():
 		crouching = false
 	if swimming and not is_on_floor() and _can_uncrouch():
 		crouching = false
@@ -209,7 +225,7 @@ func _do_horizontal_movement(delta):
 	var accel = WALK_ACCELERATION
 	var decel = RELEASE_DECELERATION
 	
-	if Input.is_action_pressed("b") and not swimming:
+	if Input.is_action_pressed("b") and allow_input and not swimming:
 		running = true
 	elif running:
 		if run_timer < 0:
@@ -278,16 +294,16 @@ func _do_vertical_movement():
 		
 		velocity.y = CEILING_HIT_SPEED
 	
-	if Input.is_action_just_pressed("a"):
+	if Input.is_action_just_pressed("a") and allow_input:
 		if is_on_floor() or swimming or can_bug_jump:
 			jump()
 	
-	if did_jump and not Input.is_action_pressed("a") and not is_on_floor():
+	if did_jump and not Input.is_action_pressed("a") and allow_input and not is_on_floor():
 		did_jump = false
 
 func _do_powerup_actions(_delta):
 	if powerup.powerup_id == "fire" and len(get_tree().get_nodes_in_group("fireballs")) < Settings.max_fireballs and not crouching:
-		if Input.is_action_just_pressed("b"):
+		if Input.is_action_just_pressed("b") and allow_input:
 			fire_anim_timer = FIRE_ANIM_TIME
 			
 			var fireball = FIREBALL_SCENE.instantiate()
@@ -404,7 +420,7 @@ func _do_animation(delta):
 		
 	# secret
 	if Settings.gamer_style:
-		if Input.is_key_pressed(KEY_ALT) and powerup.powerup_level <= 1:
+		if Input.is_key_pressed(KEY_ALT):
 			sprite.flip_h = false
 			anim_speed = 3
 			anim = "gagng"
@@ -417,7 +433,7 @@ func _do_animation(delta):
 			Audio.resume_music()
 
 	sprite.speed_scale = anim_speed
-	if anim != "":
+	if anim != "" and sprite.sprite_frames.has_animation(anim):
 		sprite.play(anim)
 		
 		if anim_frame != null:
@@ -448,15 +464,15 @@ func _do_powerup_animations(delta):
 					else:
 						sprite.sprite_frames = current_powerup_sprites
 						sprite.play("idle")
-		else:
-			var current_powerup_sprites = character.get_powerup_sprites(powerup.powerup_id)
-			var previous_powerup_sprites = character.get_powerup_sprites(previous_powerup.powerup_id)
+		if powerup.powerup_level >= 2:
+			var colors = powerup_colors.duplicate(true)
+			colors.reverse()
+		
+			var palette = colors[fmod(collect_anim_timer * 20.0, len(colors))]
+			if palette.is_empty():
+				palette = current_palette
 			
-			if current_powerup_sprites != null and previous_powerup_sprites != null:
-				if collect_anim_grow_frame % 2 == 0:
-					sprite.sprite_frames = current_powerup_sprites
-				else:
-					sprite.sprite_frames = previous_powerup_sprites
+			_update_current_palette(palette)
 		
 		if collect_anim_timer <= 0:
 			_set_powerup(powerup)
@@ -471,6 +487,36 @@ func _do_powerup_animations(delta):
 			collect_anim_timer = 0.0
 			collect_anim_grow_timer = 0.0
 			collect_anim_grow_frame = 0
+	
+	if starman_enabled:
+		var l = 1
+		starman_timer -= delta
+		
+		var speed = 20.0
+		if starman_timer <= l:
+			speed /= 2
+		
+		var colors = powerup_colors.duplicate(true)
+		colors.reverse()
+		
+		var palette: Array = colors[fmod((starman_timer * speed), len(colors))]
+		if palette.is_empty():
+			palette = current_palette
+			
+		_update_current_palette(palette)
+		
+		if starman_timer <= 0:
+			starman_enabled = false
+			starman_timer = 0.0
+			
+			_update_current_palette(current_palette)
+			
+		if starman_timer <= l:
+			if Audio.song == "invincible":
+				if Audio.previous_song != "":
+					Audio.play_music(Audio.previous_song, Audio.song_speed)
+				else:
+					Audio.stop_music()
 
 
 func _can_uncrouch():
@@ -510,6 +556,12 @@ func _update_gravity_values():
 			current_up_gravity = SWIM_WHIRLPOOL_GRAVITY_UP
 
 func _get_move():
+	if force_move != null:
+		return force_move
+	
+	if not allow_input:
+		return 0
+	
 	return sign(Input.get_axis("left", "right"))
 
 
@@ -534,7 +586,7 @@ func jump():
 	jumped_speed = velocity.x
 	
 	jumped_move_speed = WALK_SPEED
-	if Input.is_action_pressed("b") and not swimming:
+	if Input.is_action_pressed("b") and allow_input and not swimming:
 		jumped_move_speed = RUN_SPEED
 	
 	velocity.y = -jump_speed
@@ -580,8 +632,32 @@ func die(spawn_effect := true):
 	get_tree().reload_current_scene()
 
 
+func _update_default_palette(palette):
+	if sprite == null:
+		return
+	
+	var i = 0
+	for color in palette:
+		sprite.material.set_shader_parameter("original_%s" % i, color)
+		i += 1
+
+func _update_current_palette(palette):
+	if sprite == null:
+		return
+	
+	if palette.is_empty():
+		palette = default_palette
+	
+	var i = 0
+	for color in palette:
+		sprite.material.set_shader_parameter("replace_%s" % i, color)
+		i += 1
+
+
 func _set_character(value: Character):
 	character = value
+	
+	default_palette = character.default_palette
 	_set_powerup(powerup)
 
 func _set_powerup(value: Powerup):
@@ -589,10 +665,14 @@ func _set_powerup(value: Powerup):
 	powerup = value
 	
 	if sprite != null and character != null:
-		var sprite_frames = character.get_powerup_sprites(powerup.powerup_id)
+		var character_powerup = character.get_char_powerup(powerup.powerup_id)
 		
-		if sprite_frames != null:
-			sprite.sprite_frames = sprite_frames
+		if character_powerup != null:
+			var sprite_frames = character_powerup.sprite_frames
+			if sprite_frames != null:
+				sprite.sprite_frames = sprite_frames
+			
+			current_palette = character_powerup.palette
 	
 	can_crouch = powerup.powerup_level != 0
 	_update_collision()
@@ -606,8 +686,22 @@ func _set_swimming(value: bool):
 	
 	_update_gravity_values()
 
-
 func _set_in_whirlpool(value: bool):
 	in_whirlpool = value
+
+
+func _set_starman_enabled(enabled: bool):
+	starman_enabled = enabled
 	
-	
+	if starman_enabled:
+		starman_timer = 10.6
+		Audio.play_music("invincible", Audio.song_speed)
+
+
+func _set_default_palette(palette: Array[Color]):
+	default_palette = palette
+	_update_default_palette(palette)
+
+func _set_current_palette(palette: Array[Color]):
+	current_palette = palette
+	_update_current_palette(palette)

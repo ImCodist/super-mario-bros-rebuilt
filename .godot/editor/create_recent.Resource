@@ -1,3 +1,4 @@
+Shader
 TileSet
 LevelTheme
 Character

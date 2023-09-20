@@ -134,8 +134,10 @@ animations = [{
 script = ExtResource("1_kihtx")
 powerup_id = "small"
 sprite_frames = SubResource("SpriteFrames_gkb8w")
+palette = Array[Color]([])
 
 [resource]
 script = ExtResource("3_pv4k2")
 name = "cubist"
 powerups = Array[ExtResource("1_kihtx")]([SubResource("Resource_18lyn")])
+default_palette = Array[Color]([Color(0.429688, 0.152344, 0.152344, 1), Color(0.382813, 0.332031, 0.394531, 1), Color(0.703125, 0.191406, 0.125, 1)])

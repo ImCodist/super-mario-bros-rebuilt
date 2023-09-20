@@ -149,6 +149,7 @@ animations = [{
 script = ExtResource("1_uq0ma")
 powerup_id = "small"
 sprite_frames = SubResource("SpriteFrames_gkb8w")
+palette = Array[Color]([])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ux8ku"]
 atlas = ExtResource("2_xtxm0")
@@ -283,8 +284,10 @@ animations = [{
 script = ExtResource("1_uq0ma")
 powerup_id = "big"
 sprite_frames = SubResource("SpriteFrames_o5p8j")
+palette = Array[Color]([])
 
 [resource]
 script = ExtResource("3_d6f5e")
 name = "luigi"
 powerups = Array[ExtResource("1_uq0ma")]([SubResource("Resource_18lyn"), SubResource("Resource_yulrs")])
+default_palette = Array[Color]([Color(0.996094, 0.992188, 0.996094, 1), Color(0.914063, 0.617188, 0.132813, 1), Color(0.21875, 0.527344, 0, 1)])

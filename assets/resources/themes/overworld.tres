@@ -8,4 +8,5 @@ script = ExtResource("1_g40v2")
 music = "overworld"
 background_color = Color(0.580392, 0.580392, 1, 1)
 tileset = ExtResource("2_24kb2")
-theme_assets_dir = "res://assets/sprites/themes/overworld"
+assets_dir = "res://assets/sprites/themes/overworld"
+powerup_colors = [[], [Color(0.0470588, 0.576471, 0, 1), Color(1, 0.996078, 1, 1), Color(0.917647, 0.619608, 0.133333, 1)], [Color(0.709804, 0.192157, 0.12549, 1), Color(1, 0.996078, 1, 1), Color(0.917647, 0.619608, 0.133333, 1)], [Color(0, 0, 0, 1), Color(0.996078, 0.8, 0.772549, 1), Color(0.6, 0.305882, 0, 1)]]

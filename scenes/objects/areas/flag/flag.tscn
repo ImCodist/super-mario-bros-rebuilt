@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82qau"]
 size = Vector2(16, 160)
 
-[node name="flag" type="Area2D"]
+[node name="Flag" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_mipsr")

@@ -16,8 +16,6 @@ const POINTS_SCENE = preload("res://scenes/effects/points_effect/points_effect.t
 
 const SFX_TIME_WARNING = preload("res://assets/sounds/time_warning.wav")
 
-const BARRIER_TEXTURE = preload("res://assets/sprites/objects/barrier.png")
-
 const SCREEN_SIZE = Vector2(256, 224)
 
 
@@ -43,7 +41,6 @@ var score_canvas: CanvasLayer
 
 var camera: Camera2D
 var camera_collision: CollisionShape2D
-var barrier_texture: TextureRect
 
 var background: ColorRect
 
@@ -68,9 +65,11 @@ func _ready():
 	if level_theme.music != "":
 		Audio.play_music(level_theme.music)
 	
-	if underwater:
-		for player in get_tree().get_nodes_in_group("players"):
+	for player in get_tree().get_nodes_in_group("players"):
+		if underwater:
 			player.swimming = true
+		
+		player.powerup_colors = level_theme.powerup_colors
 	
 	# Set the tilesets for the level maps.
 	for child in get_children():
@@ -197,19 +196,12 @@ func _create_camera():
 	collision_shape.size = Vector2(16, SCREEN_SIZE.y * 4)
 	camera_collision.shape = collision_shape
 	camera_body.add_child(camera_collision)
-	
-	barrier_texture = TextureRect.new()
-	barrier_texture.texture = BARRIER_TEXTURE
-	barrier_texture.stretch_mode = TextureRect.STRETCH_TILE
-	barrier_texture.size = collision_shape.size
-	barrier_texture.position = -barrier_texture.size / 2
-	camera_collision.add_child(barrier_texture)
 
 func _update_camera(delta):
-	if Main.game_paused:
+	if camera == null:
 		return
 	
-	if camera == null:
+	if Main.game_paused:
 		return
 	
 	if camera_type != CameraTypes.STATIC:
@@ -247,15 +239,6 @@ func _update_camera(delta):
 					camera.position.y = player.position.y + vertical_threshold
 				elif camera.position.y + vertical_threshold <= player.position.y:
 					camera.position.y = player.position.y - vertical_threshold
-			
-			# Barrier fade
-			var barrier_offset = 32
-			var barrier_percent = 0.0
-			var player_to_barrier = player.position.x - barrier_texture.global_position.x - 22
-			if Settings.invisible_wall_barrier and player_to_barrier <= barrier_offset:
-				barrier_percent = 1 - (player_to_barrier / barrier_offset)
-			
-			barrier_texture.modulate.a = barrier_percent
 	
 	# Collision position.
 	#var viewport_size := get_viewport_rect().size

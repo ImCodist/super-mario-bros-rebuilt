@@ -12,11 +12,13 @@ var sfx_player := AudioStreamPlayer.new()
 var _step_crochet: float
 var _current_step: float
 
-var song: String
-var song_speed: float
-var song_position: float
+var song: String = ""
+var song_speed: float = 1.0
+var song_position: float = 0.0
 
 var stopped_position: float
+
+var previous_song: String = ""
 
 var _unmute_queued = false
 var _sound_forced = false
@@ -46,6 +48,8 @@ func _process(_delta):
 
 
 func play_music(music_name: String, speed: float = 1.0, position: float = 0.0):
+	previous_song = song
+	
 	var music_path = MUSIC_PATH + music_name + "/music_" + music_name
 	song_position = 0.0
 	

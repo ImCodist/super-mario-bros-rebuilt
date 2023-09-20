@@ -8,6 +8,8 @@ extends Resource
 
 @export var powerups: Array[CharacterPowerup] = []
 
+@export var default_palette: Array[Color]
+
 
 func get_char_powerup(powerup_id: String) -> CharacterPowerup:
 	var char_powerup: CharacterPowerup = null

@@ -1,6 +1,7 @@
+CollisionShape2D
+Node2D
 SpriteThemed
 Sprite2D
-CollisionShape2D
 Area2D
 TextureRect
 AnimatedSprite2D
@@ -8,7 +9,6 @@ VisibleOnScreenNotifier2D
 CharacterBody2D
 CanvasLayer
 AudioStreamPlayer
-Node2D
 AudioStreamPlayer2D
 StaticBody2D
 LevelMap

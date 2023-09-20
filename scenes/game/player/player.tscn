@@ -1,9 +1,21 @@
-[gd_scene load_steps=172 format=3 uid="uid://clsh1qscgkcox"]
+[gd_scene load_steps=174 format=3 uid="uid://clsh1qscgkcox"]
 
 [ext_resource type="Script" path="res://scenes/game/player/player.gd" id="1_p6g8x"]
+[ext_resource type="Shader" path="res://assets/resources/shaders/palette_swap.gdshader" id="2_h8r2c"]
 [ext_resource type="Texture2D" uid="uid://okyban7wnrj1" path="res://assets/sprites/other/mario-gangnam-style-2-Sheet.png" id="3_k8e2j"]
 [ext_resource type="Texture2D" uid="uid://wbp0lcv0cu5v" path="res://assets/sprites/player_mario.png" id="3_mkhjq"]
 [ext_resource type="AudioStream" uid="uid://bmfwmxwqe2n1l" path="res://assets/sounds/other/gagnum_style.ogg" id="3_si3jy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nfy8"]
+shader = ExtResource("2_h8r2c")
+shader_parameter/original_0 = Color(0.705882, 0.192157, 0.12549, 1)
+shader_parameter/original_1 = Color(0.913725, 0.615686, 0.133333, 1)
+shader_parameter/original_2 = Color(0.419608, 0.427451, 0, 1)
+shader_parameter/original_3 = Color(0, 0, 0, 1)
+shader_parameter/replace_0 = Color(0.705882, 0.192157, 0.12549, 1)
+shader_parameter/replace_1 = Color(0.913725, 0.615686, 0.133333, 1)
+shader_parameter/replace_2 = Color(0.419608, 0.427451, 0, 1)
+shader_parameter/replace_3 = null
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_epfeh"]
 atlas = ExtResource("3_mkhjq")
@@ -1227,15 +1239,17 @@ floor_constant_speed = true
 script = ExtResource("1_p6g8x")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_7nfy8")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_gkb8w")
-animation = &"climb"
-frame_progress = 0.497503
+animation = &"walk"
 
 [node name="Collision" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-6, 0, 6, 0, 6, -11, -6, -11)
 
 [node name="CrouchRaycast" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(0, -16)
 
 [node name="SecretSong" type="AudioStreamPlayer" parent="."]

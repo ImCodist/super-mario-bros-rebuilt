@@ -10,4 +10,11 @@ extends Resource
 
 @export var tileset: TileSet
 
-@export_dir var theme_assets_dir := ""
+@export_dir var assets_dir := ""
+
+@export var powerup_colors := [
+	[],
+	[Color("0c9300"), Color("fffeff"), Color("ea9e22")],
+	[Color("b53120"), Color("fffeff"), Color("ea9e22")],
+	[Color("000000"), Color("feccc5"), Color("994e00")],
+]

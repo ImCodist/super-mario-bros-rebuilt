@@ -7,3 +7,5 @@ extends Resource
 @export var powerup_id: String
 
 @export var sprite_frames: SpriteFrames
+
+@export var palette: Array[Color]

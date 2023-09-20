@@ -16,12 +16,14 @@ const ITEM_BOX_SPEED = 20
 
 const GRAVITY = 1000
 const SPEED = 50
-const HOP_SPEED = 250
+const HOP_SPEED = 195
 
 
 var direction := 1
 
 var from_block := false
+
+var forced_points = null
 
 
 @export var powerup: Powerup = preload("res://assets/resources/powerups/big.tres")
@@ -57,7 +59,11 @@ func _physics_process(delta):
 		if is_on_wall():
 			direction = -direction
 		
-		velocity.y += GRAVITY * delta
+		var grav = GRAVITY
+		if movement_type == MovementType.HOP:
+			grav = GRAVITY / 2.0
+		
+		velocity.y += grav * delta
 		
 		if movement_type == MovementType.HOP and is_on_floor():
 			velocity.y = -HOP_SPEED
@@ -68,15 +74,23 @@ func _physics_process(delta):
 
 
 func collected(player):
+	var points = null
+	
 	if powerup != null:
 		if player.powerup.powerup_level < powerup.powerup_level:
 			player.powerup = powerup
 			player.collect_anim_timer = player.COLLECT_ANIM_TIME
 			Main.game_paused = true
+		
+		points = powerup.points
 	
+	if forced_points != null:
+		points = forced_points
+	
+	if points != null:
 		var level := Main.get_level()
 		if level != null:
-			level.add_points(powerup.points, true, position)
+			level.add_points(points, true, position)
 		
 	Audio.play_sfx(SFX_ITEM_COLLECT)
 
