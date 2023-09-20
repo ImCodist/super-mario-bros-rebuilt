@@ -120,7 +120,7 @@ var can_bug_jump := false
 var current_up_gravity = DEFAULT_GRAVITY
 var current_fall_gravity = DEFAULT_GRAVITY
 
-var hit_block := false
+var hit_blocks := []
 
 var starman_enabled := true:
 	set = _set_starman_enabled
@@ -318,8 +318,8 @@ func _do_powerup_actions(_delta):
 
 
 func _do_other():
-	if hit_block and is_on_floor():
-		hit_block = false
+	if not hit_blocks.is_empty() and is_on_floor():
+		hit_blocks = []
 
 func _do_other_unpaused(delta):
 	if can_bug_jump:
@@ -533,12 +533,9 @@ func _update_collision():
 		if crouching:
 			height = 15
 		
-		collision.set_deferred("polygon", [
-			Vector2(-h_size, 0),
-			Vector2(h_size, 0),
-			Vector2(h_size, -height + 1),
-			Vector2(-h_size, -height + 1),
-		])
+		collision.shape.size.x = h_size * 2
+		collision.shape.size.y = height
+		collision.position.y = -(height / 2.0)
 	
 		if crouch_raycast != null:
 			crouch_raycast.target_position.y = -16

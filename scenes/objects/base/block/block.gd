@@ -140,9 +140,21 @@ func _on_player_detection_body_entered(body):
 		if invisible and body.position.y <= position.y + 16:
 			return
 		
-		if body.hit_block:
+		body.hit_blocks.append(self)
+		await get_tree().physics_frame
+		
+		# check for the closest block and only hit that one
+		var closest_distance = null
+		var closest_block = null
+		for block in body.hit_blocks:
+			var distance = abs(block.position.x - body.position.x)
+			
+			if closest_distance == null or closest_distance > distance:
+				closest_distance = distance
+				closest_block = block
+		
+		if closest_block != self:
 			return
 		
-		body.hit_block = true
 		last_hit_body = body
 		hit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=174 format=3 uid="uid://clsh1qscgkcox"]
+[gd_scene load_steps=175 format=3 uid="uid://clsh1qscgkcox"]
 
 [ext_resource type="Script" path="res://scenes/game/player/player.gd" id="1_p6g8x"]
 [ext_resource type="Shader" path="res://assets/resources/shaders/palette_swap.gdshader" id="2_h8r2c"]
@@ -1232,6 +1232,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_artu3"]
+size = Vector2(12, 12)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
@@ -1244,9 +1247,9 @@ position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_gkb8w")
 animation = &"walk"
 
-[node name="Collision" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(-6, 0, 6, 0, 6, -11, -6, -11)
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_artu3")
 
 [node name="CrouchRaycast" type="RayCast2D" parent="."]
 visible = false

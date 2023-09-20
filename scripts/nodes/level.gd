@@ -247,6 +247,8 @@ func _update_camera(delta):
 			camera_collision.position.x = (SCREEN_SIZE.x / 2) + 8
 		_:
 			camera_collision.position.x = -(SCREEN_SIZE.x / 2) - 8
+			if camera.position.x < (SCREEN_SIZE.x / 2):
+				camera_collision.position.x += (SCREEN_SIZE.x / 2) - camera.position.x
 	
 	# Disable the collision if not needed.
 	camera_collision.disabled = (
