@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4eh055co1044"]
+
+[ext_resource type="TileSet" uid="uid://bxl0rshf5pmkw" path="res://assets/resources/tilesets/overworld.tres" id="1_20uvm"]
+[ext_resource type="PackedScene" uid="uid://clsh1qscgkcox" path="res://scenes/game/player/player.tscn" id="2_qvijx"]
+
+[node name="test_level2" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_qvijx")]
+position = Vector2(64, 169)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_20uvm")
+format = 2
+layer_0/tile_data = PackedInt32Array(851968, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 851974, 1, 0, 851975, 1, 0, 851976, 1, 0, 851977, 1, 0, 851978, 1, 0, 851979, 1, 0, 851980, 1, 0, 851981, 1, 0, 851982, 1, 0, 786446, 1, 0, 786447, 1, 0, 851983, 1, 0, 786445, 1, 0, 786444, 1, 0, 786443, 1, 0, 786442, 1, 0, 786441, 1, 0, 786440, 1, 0, 786439, 1, 0, 786438, 1, 0, 786437, 1, 0, 786436, 1, 0, 786435, 1, 0, 786434, 1, 0, 786433, 1, 0, 786432, 1, 0, 655365, 1, 0, 655367, 1, 0, 655369, 1, 0, 655371, 1, 0, 655373, 1, 0, 655375, 1, 0, 720903, 1, 0, 720905, 1, 0, 720907, 1, 0, 720909, 1, 0, 720911, 1, 0)

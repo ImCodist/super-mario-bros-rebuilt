@@ -47,6 +47,8 @@ func _process(delta):
 			var speed = NOCLIP_SPEED
 			if Input.is_action_pressed("b"):
 				speed *= 2.0
+			if Input.is_action_pressed("a"):
+				speed *= 2.0
 			
 			player.position += (move.normalized() * speed) * delta
 			player.velocity = Vector2.ZERO
@@ -66,7 +68,12 @@ func _debug_keys(event: InputEventKey):
 		match event.keycode:
 			KEY_F1:
 				noclip_enabled = not noclip_enabled
-				print(DEBUG_PREFIX + "Noclip set to %s." % noclip_enabled)
+			KEY_F9:
+				Engine.time_scale -= 0.1
+				print(DEBUG_PREFIX + "Set engine time scale to %s." % Engine.time_scale)
+			KEY_F10:
+				Engine.time_scale += 0.1
+				print(DEBUG_PREFIX + "Set engine time scale to %s." % Engine.time_scale)
 			KEY_F6:
 				get_tree().reload_current_scene()
 				print(DEBUG_PREFIX + "Reloaded current scene.")
@@ -74,6 +81,8 @@ func _debug_keys(event: InputEventKey):
 
 func _set_noclip_enabled(enabled):
 	noclip_enabled = enabled
+	
+	print(DEBUG_PREFIX + "Noclip set to %s." % noclip_enabled)
 	
 	for player in get_tree().get_nodes_in_group("players"):
 		if not noclip_enabled:

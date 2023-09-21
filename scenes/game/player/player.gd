@@ -133,6 +133,9 @@ var current_palette: Array[Color]:
 	set = _set_current_palette
 
 
+var previous_position: Vector2
+
+
 @onready var sprite := $Sprite
 
 
@@ -141,7 +144,7 @@ func _ready():
 	add_to_group("players")
 	
 	# Play the first frame of the walk when spawning mid-air.
-	if not is_on_floor():
+	if not check_on_floor():
 		sprite.play("walk", 0)
 		
 	# Update the powerup and gravity values.
@@ -153,6 +156,8 @@ func _physics_process(delta):
 	
 	if disabled:
 		return
+	
+	previous_position = position
 	
 	if not Main.game_paused or force_unpause:
 		# Gravity
@@ -179,6 +184,9 @@ func _physics_process(delta):
 	
 		# Move the player
 		move_and_slide()
+		
+		# Other stuffs post physics.
+		_do_other_post()
 	
 	# Do other unpaused.
 	_do_other_unpaused(delta)
@@ -199,17 +207,18 @@ func _do_gravity(delta):
 			
 			terminal_velocity = WHIRLPOOL_SPEED_CAP
 	
-	velocity.y += gravity * delta
-	if velocity.y > terminal_velocity:
-		velocity.y = terminal_velocity
+	if not check_on_floor():
+		velocity.y += gravity * delta
+		if velocity.y > terminal_velocity:
+			velocity.y = terminal_velocity
 			
 func _do_crouch():
 	var previous_crouch = crouching
-	if not crouching and is_on_floor() and Input.is_action_pressed("down") and allow_input:
+	if Input.is_action_pressed("down") and not crouching and check_on_floor() and allow_input:
 		crouching = true
-	if is_on_floor() and not Input.is_action_pressed("down") and allow_input and _can_uncrouch():
+	if not Input.is_action_pressed("down") and check_on_floor() and allow_input and _can_uncrouch():
 		crouching = false
-	if swimming and not is_on_floor() and _can_uncrouch():
+	if swimming and not check_on_floor() and _can_uncrouch():
 		crouching = false
 	
 	if previous_crouch != crouching:
@@ -218,7 +227,7 @@ func _do_crouch():
 func _do_horizontal_movement(delta):
 	var move = _get_move()
 	
-	if crouching and is_on_floor():
+	if crouching and check_on_floor():
 		move = 0
 	
 	var move_speed = WALK_SPEED
@@ -244,15 +253,15 @@ func _do_horizontal_movement(delta):
 		skidding = true
 	if skidding and sign(velocity.x) == move:
 		skidding = false
-	if not is_on_floor():
+	if not check_on_floor():
 		skidding = false
 	
-	if move != 0 or not is_on_floor():
+	if move != 0 or not check_on_floor():
 		var speed = accel
 		if skidding:
 			speed = SKID_DECELERATION
 		
-		if not is_on_floor():
+		if not check_on_floor():
 			if move == 0:
 				return
 				
@@ -286,19 +295,19 @@ func _do_horizontal_movement(delta):
 		velocity.x = move_toward(velocity.x, 0, decel * delta)
 
 func _do_vertical_movement():
-	if is_on_floor():
+	if check_on_floor():
 		jumped_speed = 0.0
 	
-	if is_on_ceiling() and not is_on_floor():
+	if is_on_ceiling() and not check_on_floor():
 		Audio.play_sfx(SFX_BUMP)
 		
 		velocity.y = CEILING_HIT_SPEED
 	
 	if Input.is_action_just_pressed("a") and allow_input:
-		if is_on_floor() or swimming or can_bug_jump:
+		if check_on_floor() or swimming or can_bug_jump:
 			jump()
 	
-	if did_jump and not Input.is_action_pressed("a") and allow_input and not is_on_floor():
+	if did_jump and not Input.is_action_pressed("a") and allow_input and not check_on_floor():
 		did_jump = false
 
 func _do_powerup_actions(_delta):
@@ -318,8 +327,22 @@ func _do_powerup_actions(_delta):
 
 
 func _do_other():
-	if not hit_blocks.is_empty() and is_on_floor():
+	if not hit_blocks.is_empty() and check_on_floor():
 		hit_blocks = []
+
+func _do_other_post():
+	# stupid fucking bug
+	# sometimes you would get stuck to the side of a wall
+	# this is a very temp and very bad solution to the problem
+	if is_on_wall() and is_on_floor() and not $FloorRaycast.is_colliding():
+		var last_collision := get_last_slide_collision()
+		if last_collision != null:
+			var move = _get_move()
+			var movement = 0.2
+			if move == -1 and last_collision.get_position() <= position:
+				position.x += movement
+			if move == 1 and last_collision.get_position() >= position:
+				position.x -= movement
 
 func _do_other_unpaused(delta):
 	if can_bug_jump:
@@ -367,7 +390,7 @@ func _do_animation(delta):
 			else:
 				bubble_timer = 1
 	
-	if is_on_floor():
+	if check_on_floor():
 		anim = "idle"
 		if velocity.x != 0:
 			anim = "walk"
@@ -412,7 +435,7 @@ func _do_animation(delta):
 			anim_frame = 0
 		
 		anim = "fire"
-		if not is_on_floor() and fire_anim_timer <= 0:
+		if not check_on_floor() and fire_anim_timer <= 0:
 			anim = "jump"
 	
 	if move != 0 and do_flip:
@@ -476,7 +499,7 @@ func _do_powerup_animations(delta):
 		
 		if collect_anim_timer <= 0:
 			_set_powerup(powerup)
-			if not is_on_floor():
+			if not check_on_floor():
 				sprite.play("walk")
 			
 			Main.game_paused = false
@@ -499,11 +522,12 @@ func _do_powerup_animations(delta):
 		var colors = powerup_colors.duplicate(true)
 		colors.reverse()
 		
-		var palette: Array = colors[fmod((starman_timer * speed), len(colors))]
-		if palette.is_empty():
-			palette = current_palette
-			
-		_update_current_palette(palette)
+		if len(colors) > 0:
+			var palette: Array = colors[fmod((starman_timer * speed), len(colors))]
+			if palette.is_empty():
+				palette = current_palette
+				
+			_update_current_palette(palette)
 		
 		if starman_timer <= 0:
 			starman_enabled = false
@@ -629,6 +653,10 @@ func die(spawn_effect := true):
 	get_tree().reload_current_scene()
 
 
+func check_on_floor():
+	return is_on_floor()
+
+
 func _update_default_palette(palette):
 	if sprite == null:
 		return
@@ -678,7 +706,7 @@ func _set_powerup(value: Powerup):
 func _set_swimming(value: bool):
 	swimming = value
 	
-	if not is_on_floor():
+	if not check_on_floor():
 		sprite.play("walk", 0)
 	
 	_update_gravity_values()

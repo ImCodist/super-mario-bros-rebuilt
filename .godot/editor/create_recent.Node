@@ -1,4 +1,7 @@
+RayCast2D
+TileMap
 CollisionShape2D
+SpriteLabel
 Node2D
 SpriteThemed
 Sprite2D
@@ -12,12 +15,9 @@ AudioStreamPlayer
 AudioStreamPlayer2D
 StaticBody2D
 LevelMap
-TileMap
 CSGBox3D
 Camera2D
 Control
 ColorRect
-SpriteLabel
-RayCast2D
 CollisionPolygon2D
 Label
