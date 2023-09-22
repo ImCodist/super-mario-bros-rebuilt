@@ -133,9 +133,6 @@ var current_palette: Array[Color]:
 	set = _set_current_palette
 
 
-var previous_position: Vector2
-
-
 @onready var sprite := $Sprite
 
 
@@ -156,8 +153,6 @@ func _physics_process(delta):
 	
 	if disabled:
 		return
-	
-	previous_position = position
 	
 	if not Main.game_paused or force_unpause:
 		# Gravity
@@ -549,20 +544,42 @@ func _can_uncrouch():
 
 func _update_collision():
 	var collision := get_node_or_null("Collision")
+	var collision_top := get_node_or_null("CollisionTop")
 	var crouch_raycast := get_node_or_null("CrouchRaycast")
+	var floor_raycast := get_node_or_null("FloorRaycast")
 	
 	if collision != null:
-		var h_size = 6
+		var h_size = 14.9
 		var height = powerup.hitbox_height
 		if crouching:
 			height = 15
 		
-		collision.shape.size.x = h_size * 2
+		collision.shape.size.x = h_size
 		collision.shape.size.y = height
-		collision.position.y = -(height / 2.0)
+		
+		if collision_top != null:
+			var slope_size = 5.0
+			var inward_size = 2.9
+			
+			var new_polygon = PackedVector2Array()
+			
+			new_polygon.append(Vector2(-h_size / 2.0, 0))
+			new_polygon.append(Vector2(h_size / 2.0, 0))
+			new_polygon.append(Vector2(h_size / 2.0 - inward_size, -slope_size))
+			new_polygon.append(Vector2(-(h_size / 2.0) + inward_size, -slope_size))
+			
+			collision_top.set_deferred("polygon", new_polygon)
+			
+			collision_top.position.y = (-height) + slope_size
+			collision.shape.size.y -= slope_size
+		
+		collision.position.y = -(collision.shape.size.y / 2.0)
 	
 		if crouch_raycast != null:
 			crouch_raycast.target_position.y = -16
+		if floor_raycast != null:
+			floor_raycast.target_position.x = h_size - 0.5
+			floor_raycast.position.x = -floor_raycast.target_position.x / 2
 
 func _update_gravity_values():
 	if not swimming:

@@ -74,6 +74,12 @@ func _debug_keys(event: InputEventKey):
 			KEY_F10:
 				Engine.time_scale += 0.1
 				print(DEBUG_PREFIX + "Set engine time scale to %s." % Engine.time_scale)
+			KEY_F11:
+				Engine.time_scale = 1.0
+				await get_tree().process_frame
+				Engine.time_scale = 0.0
+			KEY_F12:
+				Engine.time_scale = 1.0
 			KEY_F6:
 				get_tree().reload_current_scene()
 				print(DEBUG_PREFIX + "Reloaded current scene.")

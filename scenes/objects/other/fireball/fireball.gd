@@ -52,7 +52,7 @@ func _physics_process(delta):
 	if is_on_wall():
 		_destroy()
 	
-	$OnScreenNotifier.position.x = 14 * direction
+	$OnScreenNotifier.position.x = 8 * direction
 	
 	move_and_slide()
 

@@ -11,7 +11,7 @@ func hit():
 			for i in 4:
 				var particle = BRICK_PARTICLE.instantiate()
 				particle.position = position
-				get_parent().add_child(particle)
+				get_tree().current_scene.add_child(particle)
 				
 				match i:
 					0:

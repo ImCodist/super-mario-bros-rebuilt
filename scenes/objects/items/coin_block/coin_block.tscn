@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqr7rduyj0h2f"]
+[gd_scene load_steps=4 format=3 uid="uid://dqr7rduyj0h2f"]
 
 [ext_resource type="Script" path="res://scenes/objects/items/coin_block/coin_block.gd" id="1_u7mvx"]
 [ext_resource type="Texture2D" uid="uid://se285jte4km2" path="res://assets/sprites/effects/coin_block.png" id="2_2qk4y"]
+[ext_resource type="Script" path="res://scripts/nodes/on_screen_notifier.gd" id="3_u3qh4"]
 
 [node name="CoinBlock" type="Node2D"]
 script = ExtResource("1_u7mvx")
@@ -9,3 +10,9 @@ script = ExtResource("1_u7mvx")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_2qk4y")
 hframes = 4
+
+[node name="OnScreenNotifier" type="Node2D" parent="."]
+script = ExtResource("3_u3qh4")
+rect = Rect2(-4, -7, 8, 14)
+
+[connection signal="screen_exited" from="OnScreenNotifier" to="." method="_on_on_screen_notifier_screen_exited"]

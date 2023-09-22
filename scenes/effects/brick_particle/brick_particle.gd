@@ -15,8 +15,6 @@ var velocity := Vector2.ZERO
 
 func _ready():
 	texture_name = "brick_particles"
-	z_index = 1
-
 
 func _process(delta):
 	frame_timer += delta

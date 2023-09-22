@@ -55,3 +55,7 @@ func _process(delta):
 func collect():
 	Main.get_level().spawn_points(position, POINTS)
 	queue_free()
+
+
+func _on_on_screen_notifier_screen_exited():
+	queue_free()

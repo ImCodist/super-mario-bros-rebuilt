@@ -16,8 +16,6 @@ const POINTS_SCENE = preload("res://scenes/effects/points_effect/points_effect.t
 
 const SFX_TIME_WARNING = preload("res://assets/sounds/time_warning.wav")
 
-const SCREEN_SIZE = Vector2(256, 224)
-
 
 @export_group("Level Data")
 @export var world := 1
@@ -52,6 +50,8 @@ var coins := 0
 var time_warning_happened := false
 
 var timer_timer := 0.0
+
+var screen_size := Main.SCREEN_SIZE
 
 
 func _ready():
@@ -100,7 +100,7 @@ func _process(delta):
 	
 	if kill_on_fall:
 		for player in get_tree().get_nodes_in_group("players"):
-			if player.position.y >= SCREEN_SIZE.y + 32:
+			if player.position.y >= screen_size.y + 32:
 				player.die(false)
 				Audio.stop_music()
 			
@@ -171,8 +171,8 @@ func _set_background_color(value: Color):
 func _create_camera():
 	camera = Camera2D.new()
 	camera.process_mode = Node.PROCESS_MODE_ALWAYS
-	camera.position = SCREEN_SIZE / 2
-	camera.limit_bottom = int(SCREEN_SIZE.y)
+	camera.position = screen_size / 2
+	camera.limit_bottom = int(screen_size.y)
 	add_child(camera)
 	
 	for player in get_tree().get_nodes_in_group("players"):
@@ -193,7 +193,7 @@ func _create_camera():
 	
 	camera_collision = CollisionShape2D.new()
 	var collision_shape := RectangleShape2D.new()
-	collision_shape.size = Vector2(16, SCREEN_SIZE.y * 4)
+	collision_shape.size = Vector2(16, screen_size.y * 4)
 	camera_collision.shape = collision_shape
 	camera_body.add_child(camera_collision)
 
@@ -206,7 +206,7 @@ func _update_camera(delta):
 	
 	if camera_type != CameraTypes.STATIC:
 		for player in get_tree().get_nodes_in_group("players"):
-			var camera_first_offset = SCREEN_SIZE.x / 6
+			var camera_first_offset = screen_size.x / 6
 			var camera_second_offset = 8
 			
 			# Right Only Movement
@@ -244,11 +244,11 @@ func _update_camera(delta):
 	#var viewport_size := get_viewport_rect().size
 	match camera_type:
 		CameraTypes.LEFT_ONLY:
-			camera_collision.position.x = (SCREEN_SIZE.x / 2) + 8
+			camera_collision.position.x = (screen_size.x / 2) + 8
 		_:
-			camera_collision.position.x = -(SCREEN_SIZE.x / 2) - 8
-			if camera.position.x < (SCREEN_SIZE.x / 2):
-				camera_collision.position.x += (SCREEN_SIZE.x / 2) - camera.position.x
+			camera_collision.position.x = -(screen_size.x / 2) - 8
+			if camera.position.x < (screen_size.x / 2):
+				camera_collision.position.x += (screen_size.x / 2) - camera.position.x
 	
 	# Disable the collision if not needed.
 	camera_collision.disabled = (

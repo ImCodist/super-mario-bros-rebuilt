@@ -1,6 +1,8 @@
 extends Node
 
 
+const SCREEN_SIZE = Vector2(256, 224)
+
 const SFX_PAUSE = preload("res://assets/sounds/pause.wav")
 
 

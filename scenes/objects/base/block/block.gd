@@ -137,6 +137,9 @@ func _on_player_detection_body_entered(body):
 		if body.is_on_floor():
 			return
 		
+		if body.velocity.y >= 100:
+			return
+		
 		if invisible and body.position.y <= position.y + 16:
 			return
 		

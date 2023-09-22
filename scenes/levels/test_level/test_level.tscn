@@ -70,6 +70,3 @@ position = Vector2(3176, 192)
 
 [node name="Player" parent="." instance=ExtResource("2_cpexs")]
 position = Vector2(32, 200)
-
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(32, 200)

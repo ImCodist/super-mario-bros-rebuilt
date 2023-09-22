@@ -1249,8 +1249,12 @@ sprite_frames = SubResource("SpriteFrames_gkb8w")
 animation = &"walk"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_artu3")
+
+[node name="CollisionTop" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -10)
+polygon = PackedVector2Array(-6, 0, 6, 0, 4, -3, -4, -3)
 
 [node name="CrouchRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, -16)
