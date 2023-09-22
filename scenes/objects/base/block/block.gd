@@ -150,6 +150,9 @@ func _on_player_detection_body_entered(body):
 		var closest_distance = null
 		var closest_block = null
 		for block in body.hit_blocks:
+			if not is_instance_valid(block):
+				continue
+			
 			var distance = abs(block.position.x - body.position.x)
 			
 			if closest_distance == null or closest_distance > distance:

@@ -24,6 +24,7 @@ func _draw():
 		if character == "\n":
 			pos_i = 0
 			pos_y_i += 1
+			continue
 		
 		var rect_region = sprite_font.get_char_rect(character)
 		if rect_region != null:

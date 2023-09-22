@@ -1233,7 +1233,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_artu3"]
-size = Vector2(12, 12)
+size = Vector2(14.9, 7)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -1249,20 +1249,20 @@ sprite_frames = SubResource("SpriteFrames_gkb8w")
 animation = &"walk"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4.5)
+position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_artu3")
 
 [node name="CollisionTop" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, -10)
-polygon = PackedVector2Array(-6, 0, 6, 0, 4, -3, -4, -3)
+position = Vector2(0, -7)
+polygon = PackedVector2Array(-7.45, 0, 7.45, 0, 4.55, -5, -4.55, -5)
 
 [node name="CrouchRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, -16)
 hit_from_inside = true
 
 [node name="FloorRaycast" type="RayCast2D" parent="."]
-position = Vector2(-5.75, 0.1)
-target_position = Vector2(11.5, 0)
+position = Vector2(-7.2, 0.1)
+target_position = Vector2(14.4, 0)
 hit_from_inside = true
 
 [node name="SecretSong" type="AudioStreamPlayer" parent="."]

@@ -10,7 +10,7 @@ func hit():
 		if last_hit_body.powerup.powerup_level >= 1 and item_count <= 0:
 			for i in 4:
 				var particle = BRICK_PARTICLE.instantiate()
-				particle.position = position
+				particle.position = global_position
 				get_tree().current_scene.add_child(particle)
 				
 				match i:

@@ -26,3 +26,5 @@ res://scenes/effects/brick_particle/brick_particle.gd
 res://scripts/singletons/debug.gd
 res://scenes/objects/blocks/brick/brick.gd
 res://scripts/nodes/level.gd
+res://scenes/effects/bubble/bubble.tscn
+res://scripts/nodes/sprite_label.gd
