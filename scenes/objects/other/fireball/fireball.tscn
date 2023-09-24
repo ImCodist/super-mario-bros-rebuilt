@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt5dp6c7o4muj"]
+[gd_scene load_steps=6 format=3 uid="uid://bt5dp6c7o4muj"]
 
 [ext_resource type="Script" path="res://scenes/objects/other/fireball/fireball.gd" id="1_fef43"]
 [ext_resource type="Texture2D" uid="uid://wwrpfj4fcj4" path="res://assets/sprites/objects/fireball.png" id="1_wgx2o"]
 [ext_resource type="Script" path="res://scripts/nodes/on_screen_notifier.gd" id="3_obyj1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkshp"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_whgtm"]
 size = Vector2(8, 8)
 
 [node name="Fireball" type="CharacterBody2D"]
@@ -18,8 +21,17 @@ hframes = 4
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fkshp")
 
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="Collision" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_whgtm")
+
 [node name="OnScreenNotifier" type="Node2D" parent="."]
 script = ExtResource("3_obyj1")
 rect = Rect2(-4, -4, 8, 8)
 
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="screen_exited" from="OnScreenNotifier" to="." method="_on_on_screen_notifier_screen_exited"]

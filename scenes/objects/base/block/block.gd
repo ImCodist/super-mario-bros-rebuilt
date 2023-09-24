@@ -127,6 +127,8 @@ func _do_top_action():
 			if body is Item:
 				body.velocity.y = -200
 				body.direction = -body.direction
+			if body is Enemy:
+				body.die()
 
 
 func _on_player_detection_body_entered(body):

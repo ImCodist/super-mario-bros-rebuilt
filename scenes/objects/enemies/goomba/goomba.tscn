@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://lr28pdpbah41"]
+
+[ext_resource type="PackedScene" uid="uid://bldvqd1dcykn3" path="res://scenes/objects/base/enemy/enemy.tscn" id="1_xbnjt"]
+[ext_resource type="Script" path="res://scenes/objects/enemies/goomba/goomba.gd" id="2_nyhop"]
+
+[node name="Goomba" instance=ExtResource("1_xbnjt")]
+script = ExtResource("2_nyhop")
+
+[node name="OnScreenNotifier" parent="." index="3"]
+rect = Rect2(-8, -8, 16, 16)

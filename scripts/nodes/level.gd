@@ -102,7 +102,6 @@ func _process(delta):
 		for player in get_tree().get_nodes_in_group("players"):
 			if player.position.y >= screen_size.y + 32:
 				player.die(false)
-				Audio.stop_music()
 			
 	_update_camera(delta)
 	_update_hud()

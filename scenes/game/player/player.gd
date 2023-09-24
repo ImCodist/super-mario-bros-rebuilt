@@ -16,6 +16,10 @@ const SFX_DEATH = preload("res://assets/sounds/die.wav")
 const SFX_DEATH_SEQUEL = preload("res://assets/sounds/die2.wav")
 const SFX_FIREBALL = preload("res://assets/sounds/fireball.wav")
 
+# Powerups for hits.
+const POWERUP_SMALL := preload("res://assets/resources/powerups/small.tres")
+const POWERUP_BIG := preload("res://assets/resources/powerups/big.tres")
+
 
 # Values taken from https://web.archive.org/web/20130807122227if_/http://i276.photobucket.com/albums/kk21/jdaster64/smb_playerphysics.png.
 const JUMP_SPEED = 240.0
@@ -122,9 +126,12 @@ var current_fall_gravity = DEFAULT_GRAVITY
 
 var hit_blocks := []
 
+
 var starman_enabled := true:
 	set = _set_starman_enabled
 var starman_timer := 0.0
+
+var invulnerability_timer := 0.0
 
 
 var default_palette: Array[Color]:
@@ -294,9 +301,7 @@ func _do_vertical_movement():
 		jumped_speed = 0.0
 	
 	if is_on_ceiling() and not check_on_floor():
-		Audio.play_sfx(SFX_BUMP)
-		
-		velocity.y = CEILING_HIT_SPEED
+		_bump()
 	
 	if Input.is_action_just_pressed("a") and allow_input:
 		if check_on_floor() or swimming or can_bug_jump:
@@ -342,6 +347,15 @@ func _do_other_post():
 func _do_other_unpaused(delta):
 	if can_bug_jump:
 		can_bug_jump = false
+	
+	if invulnerability_timer > 0.0:
+		if not Main.game_paused:
+			invulnerability_timer -= delta
+		
+		sprite.visible = fmod((invulnerability_timer * 60.0), 4.0) <= 1
+		
+		if invulnerability_timer <= 0.0:
+			sprite.visible = true
 	
 	_do_powerup_animations(delta)
 
@@ -468,7 +482,7 @@ func _do_powerup_animations(delta):
 			collect_anim_grow_frame += 1
 			collect_anim_grow_timer = 0
 		
-		if previous_powerup.powerup_level == 0:
+		if powerup.powerup_level == 1:
 			var current_powerup_sprites = character.get_powerup_sprites(powerup.powerup_id)
 			var small_powerup = character.powerups.front()
 			if small_powerup != null and current_powerup_sprites != null:
@@ -638,9 +652,24 @@ func jump():
 		Audio.play_sfx(SFX_SWIM)
 	
 	did_jump = true
-	
 
-func die(spawn_effect := true):
+func hit():
+	print("hit")
+	
+	if powerup.powerup_level <= 0:
+		die()
+	else:
+		if powerup.powerup_level == 1:
+			powerup = POWERUP_SMALL
+		else:
+			powerup = POWERUP_BIG
+		
+		collect_anim_timer = COLLECT_ANIM_TIME
+		Main.game_paused = true
+		
+		invulnerability_timer = 3.0
+
+func die(spawn_effect := true, stop_music := true):
 	if not visible:
 		return
 	
@@ -656,6 +685,9 @@ func die(spawn_effect := true):
 		scene.sprite_frames = sprite_frames
 		
 		get_parent().add_child(scene)
+	
+	if stop_music:
+		Audio.stop_music()
 	
 	Audio.play_sfx(SFX_DEATH)
 	if Settings.programmer_death_sound and randi_range(0, 200) == 21:
@@ -673,6 +705,13 @@ func die(spawn_effect := true):
 func check_on_floor():
 	return is_on_floor()
 
+func is_invulnerable():
+	return invulnerability_timer > 0.0
+
+
+func _bump():
+	Audio.play_sfx(SFX_BUMP)
+	velocity.y = CEILING_HIT_SPEED
 
 func _update_default_palette(palette):
 	if sprite == null:

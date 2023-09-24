@@ -8,10 +8,10 @@
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_335ls"]
-size = Vector2(14.5, 2)
+size = Vector2(15, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2bnlm"]
-size = Vector2(16, 2.125)
+size = Vector2(16, 1)
 
 [node name="Block" type="StaticBody2D"]
 script = ExtResource("1_tpp8n")
@@ -35,7 +35,7 @@ shape = SubResource("RectangleShape2D_335ls")
 
 [node name="TopDetection" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 14
 
 [node name="Collision" type="CollisionShape2D" parent="TopDetection"]
 position = Vector2(0, -8.0625)

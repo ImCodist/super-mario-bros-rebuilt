@@ -63,7 +63,17 @@ func _get_camera_rect():
 	if camera == null:
 		return
 	
-	return Rect2(
+	var cam_rect = Rect2(
 		camera.get_screen_center_position() - (Main.SCREEN_SIZE / 2),
 		Main.SCREEN_SIZE
 	)
+	
+	var level = Main.get_level()
+	if level != null:
+		if (
+			level.camera_type == Level.CameraTypes.RIGHT_ONLY
+			or level.camera_type == Level.CameraTypes.LEFT_ONLY
+		):
+			cam_rect.position.y = 0
+	
+	return cam_rect

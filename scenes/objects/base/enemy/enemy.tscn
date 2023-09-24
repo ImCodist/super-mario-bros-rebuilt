@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bldvqd1dcykn3"]
+
+[ext_resource type="Script" path="res://scenes/objects/base/enemy/enemy.gd" id="1_g0h4y"]
+[ext_resource type="Texture2D" uid="uid://b41iy704u0wry" path="res://assets/sprites/themes/overworld/goomba.png" id="2_cxfia"]
+[ext_resource type="Script" path="res://scripts/nodes/sprite_themed.gd" id="2_ywweb"]
+[ext_resource type="Script" path="res://scripts/nodes/on_screen_notifier.gd" id="4_x6cqi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xulw"]
+size = Vector2(16, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e388f"]
+size = Vector2(11, 7)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("1_g0h4y")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+texture = ExtResource("2_cxfia")
+hframes = 3
+script = ExtResource("2_ywweb")
+texture_name = "goomba"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_8xulw")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_e388f")
+
+[node name="OnScreenNotifier" type="Node2D" parent="."]
+script = ExtResource("4_x6cqi")
+
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="screen_entered" from="OnScreenNotifier" to="." method="_on_on_screen_notifier_screen_entered"]
+[connection signal="screen_exited" from="OnScreenNotifier" to="." method="_on_on_screen_notifier_screen_exited"]

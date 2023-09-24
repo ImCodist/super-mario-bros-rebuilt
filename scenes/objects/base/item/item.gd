@@ -15,8 +15,8 @@ const SFX_ITEM_COLLECT = preload("res://assets/sounds/powerup.wav")
 const ITEM_BOX_SPEED = 20
 
 const GRAVITY = 1000
-const SPEED = 50
-const HOP_SPEED = 195
+const SPEED = 60
+const HOP_SPEED = 200
 
 
 var direction := 1
@@ -61,7 +61,7 @@ func _physics_process(delta):
 		
 		var grav = GRAVITY
 		if movement_type == MovementType.HOP:
-			grav = GRAVITY / 2.0
+			grav = GRAVITY / 1.7
 		
 		velocity.y += grav * delta
 		

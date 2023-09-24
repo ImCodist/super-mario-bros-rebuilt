@@ -50,6 +50,7 @@ func _physics_process(delta):
 	if is_on_floor():
 		velocity.y = -HOP_SPEED
 	if is_on_wall():
+		Audio.play_sfx(SFX_BUMP)
 		_destroy()
 	
 	$OnScreenNotifier.position.x = 8 * direction
@@ -57,8 +58,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _destroy():
-	Audio.play_sfx(SFX_BUMP)
-	
 	_spawn_particle()
 	queue_free()
 
@@ -71,3 +70,15 @@ func _spawn_particle():
 
 func _on_on_screen_notifier_screen_exited():
 	queue_free()
+
+
+func _on_hit_box_body_entered(_body):
+	pass
+
+func _on_hit_box_area_entered(area):
+	var body = area.get_parent()
+	if body is Enemy:
+		body.direction = direction
+		body.die()
+		
+		_destroy()
