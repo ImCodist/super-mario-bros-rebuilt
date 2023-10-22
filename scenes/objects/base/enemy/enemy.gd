@@ -27,6 +27,9 @@ var been_killed := false
 var bodies_inside := []
 
 
+var delete_direction := 0
+
+
 @export var movement_type := MovementType.HORIZONTAL
 
 @export var can_stomp := true
@@ -37,11 +40,16 @@ var bodies_inside := []
 @onready var sprite := $Sprite
 @onready var collision := $Collision
 @onready var hitbox := $Hitbox
+@onready var on_screen_notifier := $OnScreenNotifier
 
 
 func _ready():
 	set_process(false)
 	set_physics_process(false)
+	
+	collision.disabled = true
+	
+	add_to_group("enemies")
 
 func _physics_process(delta):
 	_check_collisions()
@@ -149,9 +157,19 @@ func _spawn_points():
 func _on_on_screen_notifier_screen_entered():
 	set_process(true)
 	set_physics_process(true)
+	
+	collision.disabled = false
 
 func _on_on_screen_notifier_screen_exited():
-	queue_free()
+	match delete_direction:
+		-1:
+			if on_screen_notifier.camera.position.x > position.x:
+				queue_free()
+		1:
+			if on_screen_notifier.camera.position.x < position.x:
+				queue_free()
+		_:
+			pass
 
 
 func _on_hitbox_body_exited(body):

@@ -30,7 +30,8 @@ const SFX_TIME_WARNING = preload("res://assets/sounds/time_warning.wav")
 
 @export_group("Other")
 @export var can_pause := true
-@export var camera_type := CameraTypes.RIGHT_ONLY
+@export var camera_type := CameraTypes.RIGHT_ONLY:
+	set = _set_camera_type
 @export var kill_on_fall := true
 
 
@@ -65,11 +66,15 @@ func _ready():
 	if level_theme.music != "":
 		Audio.play_music(level_theme.music)
 	
+	# Update players.
 	for player in get_tree().get_nodes_in_group("players"):
 		if underwater:
 			player.swimming = true
 		
 		player.powerup_colors = level_theme.powerup_colors
+	
+	# Update objects.
+	_set_camera_type(camera_type)
 	
 	# Set the tilesets for the level maps.
 	for child in get_children():
@@ -278,3 +283,14 @@ func _update_hud():
 	hud.world_value_label.text = "%2d-%s" % [world, level]
 	hud.score_value_label.text = "%06d" % [score]
 	hud.coin_value_label.text = "*%02d" % [coins]
+
+
+func _set_camera_type(new_camera_type):
+	camera_type = new_camera_type
+	
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		match camera_type:
+			CameraTypes.RIGHT_ONLY:
+				enemy.delete_direction = -1
+			CameraTypes.LEFT_ONLY:
+				enemy.delete_direction = 1
