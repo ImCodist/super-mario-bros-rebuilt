@@ -670,7 +670,7 @@ region = Rect2(48, 0, 16, 32)
 atlas = ExtResource("1_5i6hy")
 region = Rect2(32, 0, 16, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_gkb8w"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_qkdq6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -1224,7 +1224,7 @@ animations = [{
 [sub_resource type="Resource" id="Resource_18lyn"]
 script = ExtResource("1_mom4b")
 powerup_id = "small"
-sprite_frames = SubResource("SpriteFrames_gkb8w")
+sprite_frames = SubResource("SpriteFrames_qkdq6")
 palette = Array[Color]([])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_olrpu"]

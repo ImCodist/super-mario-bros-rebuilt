@@ -6,6 +6,9 @@ const SPEED = 60
 
 var points := 100
 
+var move := true
+var destroy := true
+
 
 func _ready():
 	var index = POINTS_ARRAY.find(points)
@@ -14,11 +17,13 @@ func _ready():
 	
 	frame = index
 	
-	get_tree().create_timer(0.8, false).timeout.connect(_on_timeout)
+	if destroy:
+		get_tree().create_timer(0.8, false).timeout.connect(_on_timeout)
 
 
 func _process(delta):
-	position.y -= SPEED * delta
+	if move:
+		position.y -= SPEED * delta
 
 
 func _on_timeout():

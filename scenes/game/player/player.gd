@@ -97,7 +97,6 @@ var in_whirlpool = false: set = _set_in_whirlpool
 
 var disabled = false
 var allow_input = true
-var force_unpause = false
 
 var force_move = null
 
@@ -158,10 +157,7 @@ func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
 	
-	if disabled:
-		return
-	
-	if not Main.game_paused or force_unpause:
+	if not Main.game_paused and not disabled:
 		# Gravity
 		_do_gravity(delta)
 		
@@ -345,11 +341,13 @@ func _do_other_post():
 				position.x -= movement
 
 func _do_other_unpaused(delta):
-	if can_bug_jump:
+	var stopped = Main.game_paused or disabled
+	
+	if can_bug_jump and not stopped:
 		can_bug_jump = false
 	
 	if invulnerability_timer > 0.0:
-		if not Main.game_paused:
+		if not stopped:
 			invulnerability_timer -= delta
 		
 		sprite.visible = fmod((invulnerability_timer * 60.0), 4.0) <= 1
@@ -654,8 +652,6 @@ func jump():
 	did_jump = true
 
 func hit():
-	print("hit")
-	
 	if powerup.powerup_level <= 0:
 		die()
 	else:
@@ -673,18 +669,20 @@ func die(spawn_effect := true, stop_music := true):
 	if not visible:
 		return
 	
-	if spawn_effect:
-		var sprite_frames = sprite.sprite_frames
-		
-		var small_powerup = character.powerups.front()
-		if small_powerup != null:
-			sprite_frames = small_powerup.sprite_frames
-		
-		var scene = DEATH_SCENE.instantiate()
-		scene.position = position
-		scene.sprite_frames = sprite_frames
-		
-		get_parent().add_child(scene)
+	var sprite_frames = sprite.sprite_frames
+	
+	var small_powerup = character.powerups.front()
+	if small_powerup != null:
+		sprite_frames = small_powerup.sprite_frames
+	
+	var scene = DEATH_SCENE.instantiate()
+	scene.position = position
+	scene.sprite_frames = sprite_frames
+	
+	if not spawn_effect:
+		scene.visible = false
+	
+	get_parent().add_child(scene)
 	
 	if stop_music:
 		Audio.stop_music()
@@ -696,7 +694,9 @@ func die(spawn_effect := true, stop_music := true):
 	Main.game_paused = true
 	visible = false
 	
-	await get_tree().create_timer(4.0, false).timeout
+	await scene.finished
+	
+	Audio.stop_sfx()
 	
 	Main.game_paused = false
 	get_tree().reload_current_scene()

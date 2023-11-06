@@ -50,6 +50,8 @@ var coins := 0
 
 var time_warning_happened := false
 
+var force_timer_stop := false
+
 var timer_timer := 0.0
 
 var screen_size := Main.SCREEN_SIZE
@@ -88,7 +90,7 @@ func _process(delta):
 	if get_tree().paused:
 		return
 	
-	if not Main.game_paused:
+	if not Main.game_paused and not force_timer_stop:
 		timer_timer += delta
 		
 		if timer_timer >= 0.5 and timer > 0:

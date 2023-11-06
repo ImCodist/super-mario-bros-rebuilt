@@ -1,3 +1,4 @@
+Sprite2D
 CollisionShape2D
 Area2D
 Node2D
@@ -10,7 +11,6 @@ VisibleOnScreenNotifier2D
 RayCast2D
 TileMap
 SpriteLabel
-Sprite2D
 TextureRect
 CanvasLayer
 AudioStreamPlayer

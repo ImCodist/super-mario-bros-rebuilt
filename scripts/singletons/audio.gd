@@ -71,6 +71,17 @@ func play_music(music_name: String, speed: float = 1.0, position: float = 0.0):
 		
 		i += 1
 
+func play_music_stream(stream: AudioStream, index := 0):
+	Audio.song = ""
+	
+	var i = 0
+	for player in mus_players:
+		if i == index:
+			player.stream = stream
+			player.play()
+		if i > index:
+			player.stop()
+
 func stop_music():
 	stopped_position = song_position
 	
@@ -107,6 +118,10 @@ func play_sfx(audio: AudioStream, force := false):
 	
 	if Settings.mute_music_channel_on_sfx:
 		_toggle_music_channels(false)
+
+func stop_sfx():
+	sfx_player.stop()
+	_toggle_music_channels(true)
 
 
 func _toggle_music_channels(enabled: bool):

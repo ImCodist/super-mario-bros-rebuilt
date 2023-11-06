@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bu1e8jsg7weyk" path="res://assets/sprites/themes/overworld/flag.png" id="2_8xtox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82qau"]
-size = Vector2(16, 160)
+size = Vector2(8, 160)
 
 [node name="Flag" type="Area2D"]
 collision_layer = 0
