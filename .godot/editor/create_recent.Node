@@ -1,16 +1,18 @@
+Control
+AnimatedSprite2D
+SpriteLabel
+ColorRect
 Sprite2D
 CollisionShape2D
 Area2D
 Node2D
 OnScreenNotifier
 SpriteThemed
-AnimatedSprite2D
 CharacterBody2D
 CollisionPolygon2D
 VisibleOnScreenNotifier2D
 RayCast2D
 TileMap
-SpriteLabel
 TextureRect
 CanvasLayer
 AudioStreamPlayer
@@ -19,6 +21,4 @@ StaticBody2D
 LevelMap
 CSGBox3D
 Camera2D
-Control
-ColorRect
 Label

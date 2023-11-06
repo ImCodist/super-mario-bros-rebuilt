@@ -17,3 +17,8 @@ res://default_bus_layout.tres
 res://scenes/game/player/player.gd
 res://assets/resources/characters/luigi.tres
 res://scenes/effects/player_dead/player_dead.gd
+res://scenes/other/level_intro/level_intro.tscn
+res://scenes/game/hud/hud.tscn
+res://scenes/game/hud/hud.gd
+res://assets/resources/characters/cubist.tres
+res://scenes/other/level_intro/level_intro.gd

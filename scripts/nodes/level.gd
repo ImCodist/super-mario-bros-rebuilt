@@ -46,6 +46,7 @@ var background: ColorRect
 
 var score := 0
 var coins := 0
+var lives := 3
 
 
 var time_warning_happened := false
@@ -273,18 +274,14 @@ func _update_camera(delta):
 
 
 func _update_hud():
-	if use_timer:
-		hud.time_value_label.text = " %03d" % timer
-	else:
-		hud.time_value_label.text = ""
-		
 	for player in get_tree().get_nodes_in_group("players"):
 		if player.character != null:
 			hud.player_label.text = player.character.name
 	
-	hud.world_value_label.text = "%2d-%s" % [world, level]
-	hud.score_value_label.text = "%06d" % [score]
-	hud.coin_value_label.text = "*%02d" % [coins]
+	hud.set_timer_text(timer, use_timer)
+	hud.set_world_text(world, level)
+	hud.set_score_text(score)
+	hud.set_coin_text(coins)
 
 
 func _set_camera_type(new_camera_type):
