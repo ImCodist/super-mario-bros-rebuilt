@@ -681,7 +681,7 @@ region = Rect2(48, 0, 16, 32)
 atlas = ExtResource("3_mkhjq")
 region = Rect2(32, 0, 16, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_xb5g4"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_qkdq6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -692,7 +692,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"climb",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1155,7 +1155,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"gagng",
-"speed": 20.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1245,8 +1245,8 @@ script = ExtResource("1_p6g8x")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_7nfy8")
 position = Vector2(0, -15)
-sprite_frames = SubResource("SpriteFrames_xb5g4")
-animation = &"gagng"
+sprite_frames = SubResource("SpriteFrames_qkdq6")
+animation = &"walk"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
