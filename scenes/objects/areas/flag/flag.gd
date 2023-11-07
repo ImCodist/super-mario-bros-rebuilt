@@ -252,7 +252,7 @@ func finished_flag(force_skip := false):
 		if Settings.flag_frame_rule:
 			await frame_rule_check
 	
-	get_tree().reload_current_scene()
+	Main.change_level("res://scenes/levels/test_level/test_level.tscn")
 
 
 func get_point_value(y_pos: int):

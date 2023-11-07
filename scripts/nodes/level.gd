@@ -293,3 +293,9 @@ func _set_camera_type(new_camera_type):
 				enemy.delete_direction = -1
 			CameraTypes.LEFT_ONLY:
 				enemy.delete_direction = 1
+
+
+func from_previous_level(level_scene: Level):
+	score = level_scene.score
+	coins = level_scene.coins
+	lives = level_scene.lives

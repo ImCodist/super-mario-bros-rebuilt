@@ -1248,6 +1248,7 @@ scale = Vector2(0.333333, 0.333333)
 texture = ExtResource("1_56gna")
 
 [node name="CenterContainer" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1298,4 +1299,5 @@ animation = &"idle"
 
 [node name="HUD" parent="." instance=ExtResource("2_88kor")]
 layer = 0
+visible = false
 is_level_intro = true
