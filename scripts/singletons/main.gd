@@ -15,6 +15,8 @@ var turbo_toggle = false
 var pause_sound_playing := false
 var pause_music_was_playing := true
 
+var pause_sound_player := AudioStreamPlayer.new()
+
 
 var game_paused := false
 
@@ -22,6 +24,8 @@ var game_paused := false
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	randomize()
+	
+	add_child(pause_sound_player)
 
 func _unhandled_input(event):
 	_pause_logic(event)
@@ -68,18 +72,22 @@ func _pause_logic(event: InputEvent):
 	
 	if event.is_action_pressed("start"):
 		get_tree().paused = not get_tree().paused
-		Audio.play_sfx(SFX_PAUSE, true)
+		
+		pause_sound_player.stream = SFX_PAUSE
+		pause_sound_player.play()
 		
 		if not get_tree().paused:
-			pause_music_was_playing = Audio.music_is_playing()
+			pause_music_was_playing = pause_sound_player.playing
 			Audio.stop_music()
+			Audio.sfx_player.volume_db = -80.0
 		
 		pause_sound_playing = true
-		await Audio.sfx_player.finished
+		await pause_sound_player.finished
 		pause_sound_playing = false
 		
 		if not get_tree().paused and pause_music_was_playing:
 			Audio.resume_music()
+			Audio.sfx_player.volume_db = 0.0
 
 
 func change_scene(scene):

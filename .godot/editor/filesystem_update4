@@ -12,3 +12,5 @@ res://scenes/objects/items/1up/1up.tscn
 res://scenes/objects/items/1up/1up.gd
 res://scenes/game/player/player.tscn
 res://scenes/game/player/player.gd
+res://scenes/objects/areas/flag/flag.gd
+res://scripts/singletons/audio.gd

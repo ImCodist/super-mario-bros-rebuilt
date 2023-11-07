@@ -26,7 +26,6 @@ var _sound_forced = false
 
 func _ready():
 	sfx_player.bus = "SFX"
-	sfx_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(sfx_player)
 	
 	for i in MUSIC_PLAYERS:
@@ -58,7 +57,11 @@ func play_music(music_name: String, speed: float = 1.0, position: float = 0.0):
 		song = music_name
 		song_speed = speed
 		
-		player.stream = load(music_path + "_%s.ogg" % (i + 1))
+		var full_path = music_path + "_%s.ogg" % (i + 1)
+		if not FileAccess.file_exists(full_path):
+			continue
+			
+		player.stream = load(full_path)
 		player.pitch_scale = speed
 		
 		if position < 0.0:
