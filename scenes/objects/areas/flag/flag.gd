@@ -18,6 +18,7 @@ enum FlagState {
 const FLAG_DOWN_SPEED := 110
 
 
+const LEVEL_COMPLETE_MUSIC := preload("res://assets/sounds/level_complete.wav")
 
 const FLAG_DOWN_SFX := preload("res://assets/sounds/flag_down.wav")
 const SCORE_SFX := preload("res://assets/sounds/flag_score.wav")
@@ -163,7 +164,7 @@ func grounded_flag():
 func walk_flag():
 	state = FlagState.WALK
 	
-	Audio.play_music("level_complete")
+	Audio.play_music_stream(LEVEL_COMPLETE_MUSIC)
 	
 	player.velocity.x = 50
 	player.position.x = position.x + 8

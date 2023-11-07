@@ -1,3 +1,4 @@
+AudioStreamPlayer
 Control
 AnimatedSprite2D
 SpriteLabel
@@ -15,7 +16,6 @@ RayCast2D
 TileMap
 TextureRect
 CanvasLayer
-AudioStreamPlayer
 AudioStreamPlayer2D
 StaticBody2D
 LevelMap

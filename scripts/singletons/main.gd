@@ -78,6 +78,7 @@ func _pause_logic(event: InputEvent):
 		
 		if not get_tree().paused:
 			pause_music_was_playing = pause_sound_player.playing
+			
 			Audio.stop_music()
 			Audio.sfx_player.volume_db = -80.0
 		

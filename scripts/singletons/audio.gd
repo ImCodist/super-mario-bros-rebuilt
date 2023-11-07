@@ -60,7 +60,7 @@ func play_music(music_name: String, speed: float = 1.0, position: float = 0.0):
 		var full_path = music_path + "_%s.ogg" % (i + 1)
 		if not FileAccess.file_exists(full_path):
 			continue
-			
+		
 		player.stream = load(full_path)
 		player.pitch_scale = speed
 		
