@@ -699,7 +699,16 @@ func die(spawn_effect := true, stop_music := true):
 	Audio.stop_sfx()
 	
 	Main.game_paused = false
-	get_tree().reload_current_scene()
+	
+	var level := Main.get_level()
+	if level != null:
+		level.lives -= 1
+	
+	if level != null and level.scene_file_path != "":
+		Main.change_level(level.scene_file_path)
+	else:
+		# backup
+		get_tree().reload_current_scene()
 
 
 func check_on_floor():

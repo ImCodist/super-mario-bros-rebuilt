@@ -8,5 +8,6 @@ func collected(_player):
 	var level = Main.get_level()
 	if level != null:
 		level.spawn_points(position, 1)
+		level.lives += 1
 	
 	Audio.play_sfx(SFX_1UP)

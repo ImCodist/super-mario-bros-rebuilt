@@ -7,6 +7,6 @@
 [node name="1UP" instance=ExtResource("1_ob2ly")]
 script = ExtResource("2_mirai")
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_4tg81")
 texture_name = "1up"

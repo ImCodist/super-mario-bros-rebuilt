@@ -11,6 +11,7 @@ extends Control
 @onready var player_sprite := $CenterContainer/PlayerSprite
 
 
+var previous_level_scene: Level
 var level_scene: Level
 
 
@@ -33,14 +34,21 @@ func from_level(level: Level):
 
 func _do_intro():
 	var center_container := $CenterContainer
-	var level_color := level_scene.level_theme.background_color
+	
+	var previous_level_color := Color.BLACK
+	if previous_level_scene != null and previous_level_scene.level_theme != null:
+		previous_level_color = previous_level_scene.level_theme.background_color
+	
+	var level_color := Color.BLACK
+	if level_scene != null and level_scene.level_theme != null:
+		level_color = level_scene.level_theme.background_color
 	
 	var wait_time := 3.0
 	var flicker_timer := 0.0666667
 	
 	hud.visible = false
 	center_container.visible = false
-	background.color = level_color
+	background.color = previous_level_color
 	await get_tree().create_timer(flicker_timer, false).timeout
 	
 	background.color = Color.BLACK

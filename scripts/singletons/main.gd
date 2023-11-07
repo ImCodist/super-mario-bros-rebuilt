@@ -119,5 +119,6 @@ func change_level(scene, inherit_previous_level = true, no_level_intro = false):
 		change_scene(level_scene)
 	else:
 		var level_intro = LEVEL_INTRO_SCENE.instantiate()
+		level_intro.previous_level_scene = previous_level 
 		level_intro.level_scene = level_scene
 		change_scene(level_intro)
