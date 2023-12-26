@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vq4oogdu27ff"]
+
+[ext_resource type="Script" path="res://scenes/objects/warps/warp/warp.gd" id="1_ftrl3"]
+
+[node name="Warp" type="Node2D"]
+script = ExtResource("1_ftrl3")

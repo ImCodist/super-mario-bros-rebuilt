@@ -145,13 +145,10 @@ var current_palette: Array[Color]:
 func _ready():
 	# Add to the players group.
 	add_to_group("players")
-	
-	# Play the first frame of the walk when spawning mid-air.
-	if not check_on_floor():
-		sprite.play("walk", 0)
 		
 	# Update the powerup and gravity values.
 	_set_character(character)
+
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():
@@ -604,6 +601,7 @@ func _update_gravity_values():
 		else:
 			current_fall_gravity = SWIM_WHIRLPOOL_GRAVITY
 			current_up_gravity = SWIM_WHIRLPOOL_GRAVITY_UP
+
 
 func _get_move():
 	if force_move != null:

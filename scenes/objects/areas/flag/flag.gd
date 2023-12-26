@@ -98,7 +98,7 @@ func _process(_delta):
 				Main.get_level().score += Main.get_level().timer * 100
 				Main.get_level().timer = 0
 				
-				Audio.stop_music()
+				Audio.stop_music(true)
 			
 			if Main.get_level().timer > 0:
 				timer_timer += _delta
@@ -164,7 +164,7 @@ func grounded_flag():
 func walk_flag():
 	state = FlagState.WALK
 	
-	Audio.play_music_stream(LEVEL_COMPLETE_MUSIC)
+	Audio.play_music("level_complete")
 	
 	player.velocity.x = 50
 	player.position.x = position.x + 8
@@ -245,6 +245,8 @@ func fireworks_flag():
 
 func finished_flag(force_skip := false):
 	state = FlagState.FINISHED
+	
+	Audio.stop_music(true)
 	
 	if not force_skip:
 		await get_tree().create_timer(2.0, false).timeout

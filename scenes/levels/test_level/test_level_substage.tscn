@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://cao8w4v6qxos"]
+
+[ext_resource type="Script" path="res://scripts/nodes/level.gd" id="1_7bma6"]
+[ext_resource type="TileSet" uid="uid://da3c6iy2nxmbc" path="res://assets/resources/tilesets/base.tres" id="11_i5noo"]
+[ext_resource type="Script" path="res://scripts/nodes/levelmap.gd" id="12_us77r"]
+[ext_resource type="PackedScene" uid="uid://dak3ygdcosook" path="res://scenes/objects/warps/warp_pipe/warp_pipe.tscn" id="13_wqwum"]
+[ext_resource type="PackedScene" uid="uid://clsh1qscgkcox" path="res://scenes/game/player/player.tscn" id="16_ytai5"]
+
+[node name="test_level" type="Node2D"]
+script = ExtResource("1_7bma6")
+substage = true
+camera_type = 3
+
+[node name="LevelMap" type="TileMap" parent="."]
+tile_set = ExtResource("11_i5noo")
+format = 2
+layer_0/tile_data = PackedInt32Array(851969, 1, 0, 851968, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 851974, 1, 0, 851975, 1, 0, 851976, 1, 0, 851977, 1, 0, 851978, 1, 0, 851979, 1, 0, 851980, 1, 0, 851981, 1, 0, 851982, 1, 0, 851983, 1, 0, 786447, 1, 0, 786446, 1, 0, 786445, 1, 0, 786444, 1, 0, 786443, 1, 0, 786442, 1, 0, 786441, 1, 0, 786440, 1, 0, 786439, 1, 0, 786438, 1, 0, 786437, 1, 0, 786436, 1, 0, 786435, 1, 0, 786434, 1, 0, 786433, 1, 0, 786432, 1, 0, 720896, 1, 0, 655360, 1, 0, 589824, 1, 0, 524288, 1, 0, 458752, 1, 0, 393216, 1, 0, 327680, 1, 0, 262144, 1, 0, 196608, 1, 0, 131072, 1, 0, 131087, 1, 0, 196623, 1, 0, 262159, 1, 0, 327695, 1, 0, 393231, 1, 0, 458767, 1, 0, 524303, 1, 0, 589839, 1, 0, 655375, 1, 0, 720911, 1, 0, 655372, 589825, 2, 720908, 589825, 3, 655373, 655361, 2, 720909, 655361, 3, 655371, 524289, 2, 720907, 524289, 3, 589837, 655361, 1, 589838, 720897, 1, 524301, 655361, 1, 524302, 720897, 1, 458765, 655361, 1, 458766, 720897, 1, 393229, 655361, 1, 393230, 720897, 1, 327693, 655361, 1, 327694, 720897, 1, 262157, 655361, 1, 262158, 720897, 1, 196621, 655361, 1, 196622, 720897, 1, 131085, 655361, 1, 131086, 720897, 1, 655374, 720897, 1, 720910, 720897, 1)
+script = ExtResource("12_us77r")
+
+[node name="Player2" parent="." instance=ExtResource("16_ytai5")]
+position = Vector2(120, 192)
+
+[node name="PipeEntrance" parent="." instance=ExtResource("13_wqwum")]
+position = Vector2(176, 176)
+pipe_direction = 3
+pipe_scene = "res://scenes/levels/test_level/test_level.tscn"

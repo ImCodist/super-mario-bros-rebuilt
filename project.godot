@@ -13,7 +13,7 @@ config_version=5
 config/name="Super Mario Bros: Rebuilt"
 config/tags=PackedStringArray("remake", "platformer")
 run/main_scene="res://scenes/levels/test_level/test_level.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.png"
 

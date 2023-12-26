@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dak3ygdcosook"]
+
+[ext_resource type="Script" path="res://scenes/objects/warps/warp_pipe/warp_pipe.gd" id="1_hlmfx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h72mh"]
+size = Vector2(3, 16)
+
+[node name="PipeEntrance" type="Node2D"]
+script = ExtResource("1_hlmfx")
+pipe_scene = "res://scenes/levels/test_level/test_level_substage.tscn"
+
+[node name="PipeArea" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="PipeArea"]
+shape = SubResource("RectangleShape2D_h72mh")

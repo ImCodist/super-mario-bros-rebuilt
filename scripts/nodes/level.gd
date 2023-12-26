@@ -58,6 +58,10 @@ var timer_timer := 0.0
 var screen_size := Main.SCREEN_SIZE
 
 
+var warp_in = null
+var warp_out = null
+
+
 func _ready():
 	# Add to the levels group.
 	add_to_group("levels")
@@ -75,6 +79,11 @@ func _ready():
 			player.swimming = true
 		
 		player.powerup_colors = level_theme.powerup_colors
+		
+		if warp_out != null:
+			for warp in get_tree().get_nodes_in_group("_warps"):
+				if warp.warp_index == warp_out:
+					player.position = warp.position
 	
 	# Update objects.
 	_set_camera_type(camera_type)
@@ -286,6 +295,9 @@ func _update_hud():
 
 func _set_camera_type(new_camera_type):
 	camera_type = new_camera_type
+	
+	if not is_inside_tree():
+		return
 	
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		match camera_type:

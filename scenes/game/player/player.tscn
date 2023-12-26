@@ -1246,7 +1246,8 @@ script = ExtResource("1_p6g8x")
 material = SubResource("ShaderMaterial_7nfy8")
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_qkdq6")
-animation = &"walk"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)

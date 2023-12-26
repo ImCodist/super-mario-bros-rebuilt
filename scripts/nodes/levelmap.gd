@@ -34,5 +34,5 @@ func generate_level():
 				var value = TILESET_SCENES[atlas_coords]
 				if value is PackedScene:
 					var scene = value.instantiate()
-					scene.position = (cell * cell_quadrant_size) + (Vector2i(cell_quadrant_size, cell_quadrant_size) / 2)
+					scene.position = (cell * rendering_quadrant_size) + (Vector2i(rendering_quadrant_size, rendering_quadrant_size) / 2)
 					add_child(scene)

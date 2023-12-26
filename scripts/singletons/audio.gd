@@ -33,6 +33,8 @@ func _ready():
 		player.bus = "Music"
 		add_child(player)
 		
+		player.finished.connect(_on_player_finished.bind(player))
+		
 		mus_players.append(player)
 	
 	sfx_player.finished.connect(_on_sfx_finished)
@@ -85,11 +87,14 @@ func play_music_stream(stream: AudioStream, index := 0):
 		if i > index:
 			player.stop()
 
-func stop_music():
+func stop_music(clear := false):
 	stopped_position = song_position
 	
 	for player in mus_players:
 		player.stop()
+		
+		if clear:
+			_on_player_finished(player)
 
 func resume_music():
 	if music_is_playing():
@@ -99,6 +104,9 @@ func resume_music():
 		return
 	
 	play_music(song, song_speed, stopped_position)
+
+func clear_music():
+	Audio.song = ""
 
 
 func music_is_playing():
@@ -164,3 +172,12 @@ func _on_step_changed():
 	if _unmute_queued:
 		_toggle_music_channels(true)
 		_unmute_queued = false
+
+
+func _on_player_finished(player):
+	if player.stream is AudioStreamMP3 or player.stream is AudioStreamOggVorbis:
+		if player.stream.loop:
+			return
+	
+	stop_music()
+	clear_music()
